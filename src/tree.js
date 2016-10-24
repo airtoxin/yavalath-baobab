@@ -12,14 +12,17 @@ const tree = new Baobab({
       }
     ]
   ],
+
   turnPlayer: {
     id: Symbol(),
     color: '',
   },
+
   game: {
     finished: false,
     winner: Symbol(),
   },
+
   constants: {
     game: {
       boardSize: 5,
