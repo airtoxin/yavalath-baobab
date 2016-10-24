@@ -3,7 +3,7 @@ import webpack from 'webpack';
 import Copy from 'copy-webpack-plugin';
 
 export default {
-  entry: './src/index.jsx',
+  entry: './src/index.js',
   output: {
     publicPath: '/',
     sourcePath: ' ',
@@ -12,11 +12,11 @@ export default {
   },
   target: 'web',
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js'],
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, include: [path.resolve(__dirname, 'src')], loader: 'babel-loader' },
+      { test: /\.js$/, include: [path.resolve(__dirname, 'src')], loader: 'babel-loader' },
       { test: /\.css$/, include: [path.resolve(__dirname, 'src')], loader: ['style', 'css?modules'] },
     ],
   },
