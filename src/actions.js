@@ -1,9 +1,14 @@
-import lodash from 'lodash';
+import { find } from 'lodash';
+import { checkFinish } from './logics/boardLogics';
 
 export function play(tree, gridX, gridY) {
+  // check game is already finished
+  if (tree.get("game", "finished")) return;
+
   const { gridStates, players } = tree.get("constants");
   const gridCursor = tree.select("board", gridY, gridX);
   const turnPlayerCursor = tree.select("turnPlayer");
+  const nextTurnPlayer = find(players, p => p.id !== turnPlayerCursor.get("id"));
 
   // check play-able grid
   if (gridCursor.get("state") !== gridStates.empty) return;
@@ -13,9 +18,23 @@ export function play(tree, gridX, gridY) {
   gridCursor.set(["state"], gridStates.occupied);
   gridCursor.set(["occupiedPlayer"], turnPlayerCursor.get());
 
-  // next turn
-  const nextTurnPlayer = lodash.find(players, p => p.id !== turnPlayerCursor.get("id"));
-  turnPlayerCursor.set(nextTurnPlayer);
+  // check game is just finished
+  const finished = checkFinish(tree.get("board"));
+  if (finished !== null) {
+    // game end
+    tree.set(["game", "finished"], true);
+
+    if (finished === true) {
+      // turn player win
+      tree.set(["game", "winner"], turnPlayerCursor.get());
+    } else {
+      // turn player lose
+      tree.set(["game", "winner"], nextTurnPlayer);
+    }
+  } else {
+    // next turn
+    turnPlayerCursor.set(nextTurnPlayer);
+  }
 
   tree.commit();
 }

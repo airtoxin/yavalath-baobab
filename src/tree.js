@@ -2,7 +2,7 @@ import Baobab from 'baobab';
 import lodash from 'lodash';
 import { gridPoint } from 'react-hex';
 
-const constants = {
+export const constants = {
   game: {
     boardSize: 5,
     gridSize: 30,

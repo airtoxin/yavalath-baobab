@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { branch } from 'baobab-react/higher-order';
 import Board from '../Board';
+import TurnPlayer from '../TurnPlayer';
 
 class App extends Component {
   render() {
-    return (<Board board={this.props.board}/>);
+    return (
+      <div>
+        <TurnPlayer />
+        <Board board={this.props.board} />
+      </div>
+    );
   }
 }
 
