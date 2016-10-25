@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  position: absolute;
+  right: 0;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+}

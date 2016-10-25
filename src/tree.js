@@ -24,6 +24,8 @@ const game = {
   winner: null,
 };
 
+const history = [];
+
 const board = lodash.range(constants.game.boardSize * 2 - 1).map((gridY) => {
   return lodash.range(constants.game.boardSize * 2 - 1).map((gridX) => {
     const { center: [x, y] } = gridPoint('pointy-topped', constants.game.gridSize, gridX, gridY, 30, 30);
@@ -42,6 +44,7 @@ export default new Baobab({
   constants,
   game,
   board,
+  history,
   turnPlayer,
 }, {
   autoCommit: false,

@@ -6,11 +6,10 @@ export function play(tree, gridX, gridY) {
   if (tree.get("game", "finished")) return;
 
   const { gridStates, players } = tree.get("constants");
-  const gridCursor = tree.select("board", gridY, gridX);
   const turnPlayerCursor = tree.select("turnPlayer");
-  const nextTurnPlayer = find(players, p => p.id !== turnPlayerCursor.get("id"));
 
   // check play-able grid
+  const gridCursor = tree.select("board", gridY, gridX);
   if (gridCursor.get("state") !== gridStates.empty) return;
   if (gridCursor.get("occupiedPlayer", "id") === turnPlayerCursor.get("id")) return;
 
@@ -18,7 +17,11 @@ export function play(tree, gridX, gridY) {
   gridCursor.set(["state"], gridStates.occupied);
   gridCursor.set(["occupiedPlayer"], turnPlayerCursor.get());
 
+  // push history
+  tree.select("history").push(gridCursor.get());
+
   // check game is just finished
+  const nextTurnPlayer = find(players, p => p.id !== turnPlayerCursor.get("id"));
   const finished = checkFinish(tree.get("board"));
   if (finished !== null) {
     // game end

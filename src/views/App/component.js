@@ -3,11 +3,13 @@ import { branch } from 'baobab-react/higher-order';
 import Board from '../Board';
 import TurnPlayer from '../TurnPlayer';
 import Finished from '../Finished';
+import History from '../History';
 
 class App extends Component {
   render() {
     return (
       <div>
+        <History />
         <TurnPlayer />
         <Finished />
         <Board board={this.props.board} />

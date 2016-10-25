@@ -17,7 +17,7 @@ export default {
   module: {
     loaders: [
       { test: /\.js$/, include: [path.resolve(__dirname, 'src')], loader: 'babel-loader' },
-      { test: /\.css$/, include: [path.resolve(__dirname, 'src')], loader: ['style', 'css?modules'] },
+      { test: /\.css$/, include: [path.resolve(__dirname, 'src')], loaders: ['style', 'css?modules'] },
     ],
   },
   plugins: [
