@@ -68,3 +68,11 @@ export const checkFinish = sortedGrids => {
 
   return null;
 };
+
+export const convertToRecordGridSystem = ({ gridX, gridY }) => {
+  let x = gridX;
+  let y = gridY;
+
+  if (gridY < 4) x = gridX - (4 - gridY);
+  return { x: x +1, y: y + 1 };
+};

@@ -25,6 +25,7 @@ const game = {
 };
 
 const history = [];
+const historyBackHistory = [];
 
 const board = lodash.range(constants.game.boardSize * 2 - 1).map((gridY) => {
   return lodash.range(constants.game.boardSize * 2 - 1).map((gridX) => {
@@ -47,6 +48,7 @@ export default new Baobab({
   game,
   board,
   history,
+  historyBackHistory,
   turnPlayer,
   highlight,
 }, {
