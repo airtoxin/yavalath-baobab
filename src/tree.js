@@ -40,12 +40,15 @@ const board = lodash.range(constants.game.boardSize * 2 - 1).map((gridY) => {
   });
 });
 
+const highlight = null;
+
 export default new Baobab({
   constants,
   game,
   board,
   history,
   turnPlayer,
+  highlight,
 }, {
   autoCommit: false,
 });

@@ -41,3 +41,13 @@ export function play(tree, gridX, gridY) {
 
   tree.commit();
 }
+
+export function enableHighlight(tree, highlightGrid) {
+  tree.set(["highlight"], { ...highlightGrid, occupiedPlayer: { ...highlightGrid.occupiedPlayer, color: 'red' } });
+  tree.commit();
+}
+
+export function disableHighlight(tree) {
+  tree.set(["highlight"], null);
+  tree.commit();
+}

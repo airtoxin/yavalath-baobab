@@ -2,6 +2,7 @@ import React from 'react';
 import lodash from 'lodash';
 import { branch } from 'baobab-react/higher-order';
 import Grid from '../Grid';
+import Highlight from '../Highlight';
 import * as actions from '../../actions';
 
 const Board = props => {
@@ -19,7 +20,10 @@ const Board = props => {
   );
 
   return (
-    <svg width={800} height={800}>{Grids}</svg>
+    <svg width={800} height={800}>
+      {Grids}
+      <Highlight />
+    </svg>
   );
 };
 
