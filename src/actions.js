@@ -76,11 +76,14 @@ export function historyBack(tree) {
   tree.pop("history");
   tree.select("historyBackHistory").push(lastMove);
 
-  // back turn
-  const turnPlayerCursor = tree.select("turnPlayer");
-  const players = tree.get("constants", "players");
-  const prevTurnPlayer = findLast(players, p => p.id !== turnPlayerCursor.get("id"));
-  turnPlayerCursor.set(prevTurnPlayer);
+  // when game is end, turn didn't switch
+  if (!tree.get(["game", "finished"])) {
+    // back turn
+    const turnPlayerCursor = tree.select("turnPlayer");
+    const players = tree.get("constants", "players");
+    const prevTurnPlayer = findLast(players, p => p.id !== turnPlayerCursor.get("id"));
+    turnPlayerCursor.set(prevTurnPlayer);
+  }
 
   // back gridState
   const { empty } = tree.get("constants", "gridStates");
