@@ -1,5 +1,5 @@
 import { find, findLast } from 'lodash';
-import { checkFinish } from './logics/boardLogics';
+import { checkFinish } from '../logics/boardLogics';
 
 function playWithoutCommit(tree, gridX, gridY) {
   // check game is already finished

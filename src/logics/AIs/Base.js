@@ -1,4 +1,7 @@
 import { flatten } from 'lodash';
+import { constants } from '../../tree';
+
+const { gridStates: { empty } } = constants;
 
 export default class Base {
   step(board) {
@@ -6,6 +9,6 @@ export default class Base {
   }
 
   getPlayableGrids(board) {
-    return flatten(board).filter(g => g !== null && g.occupied === false);
+    return flatten(board).filter(g => g.state === empty);
   }
 }

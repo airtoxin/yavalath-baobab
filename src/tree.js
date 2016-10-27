@@ -15,9 +15,22 @@ export const constants = {
     { id: Symbol('red'), color: 'hotpink' },
     { id: Symbol('blue'), color: 'steelblue' },
   ],
+  manipulators: {
+    human: Symbol('human'),
+    robot: Symbol('robot'),
+  },
 };
 
-const turnPlayer = constants.players[0];
+const player1 = {
+  ...constants.players[0],
+  manipulator: constants.manipulators.human
+};
+const player2 = {
+  ...constants.players[1],
+  manipulator: constants.manipulators.human
+};
+
+const turnPlayer = player1;
 
 const game = {
   finished: false,
@@ -43,14 +56,18 @@ const board = lodash.range(constants.game.boardSize * 2 - 1).map((gridY) => {
 
 const highlight = null;
 
-export default new Baobab({
+const tree = new Baobab({
   constants,
   game,
   board,
   history,
   historyBackHistory,
   turnPlayer,
+  player1,
+  player2,
   highlight,
 }, {
   autoCommit: false,
 });
+
+export default tree;
