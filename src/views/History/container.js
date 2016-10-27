@@ -1,13 +1,13 @@
 import React from 'react';
 import { branch } from 'baobab-react/higher-order';
 import Component from './component';
-import * as actions from '../../actions';
+import { historyActions } from '../../actions';
 
 const Container = props => (
   <Component
     history={props.history}
-    onMouseEnter={(grid) => props.dispatch(actions.enableHighlight, grid)}
-    onMouseLeave={(grid) => props.dispatch(actions.disableHighlight, grid)}
+    onMouseEnter={(grid) => props.dispatch(historyActions.enableHighlight, grid)}
+    onMouseLeave={(grid) => props.dispatch(historyActions.disableHighlight, grid)}
   />
 );
 

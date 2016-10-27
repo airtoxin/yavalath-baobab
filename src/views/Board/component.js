@@ -3,7 +3,7 @@ import lodash from 'lodash';
 import { branch } from 'baobab-react/higher-order';
 import Grid from '../Grid';
 import Highlight from '../Highlight';
-import * as actions from '../../actions';
+import { boardActions } from '../../actions';
 
 const Board = props => {
   const Grids = lodash.flatten(
@@ -13,7 +13,7 @@ const Board = props => {
         state === gridStates.empty ? "white" :
         state === gridStates.occupied ? occupiedPlayer.color :
         "black"; // black is error...
-      const clickHandler = () => props.dispatch(actions.play, gridX, gridY);
+      const clickHandler = () => props.dispatch(boardActions.play, gridX, gridY);
 
       return <Grid key={`${gridX}-${gridY}`} x={x} y={y} size={gridSize} fill={fill} onClick={clickHandler} />
     }))
@@ -29,5 +29,5 @@ const Board = props => {
 
 export default branch({
   gridStates: ["constants", "gridStates"],
-  gridSize: ["constants", "game", "gridSize"],
+  gridSize: ["game", "constants", "gridSize"],
 }, Board);
