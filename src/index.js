@@ -11,10 +11,10 @@ const Rooted = root(tree, App);
 const ai = new RandomAI();
 
 tree.select("turnPlayer").on("update", updatee => {
-  // if (updatee.data.currentData.id === constants.players[1].id) {
-  //   const { gridX, gridY } = ai.step(tree.get("board"));
-  //   boardActions.play(tree, gridX, gridY);
-  // }
+  if (updatee.data.currentData.manipulator === constants.manipulators.robot) {
+    const { gridX, gridY } = ai.step(tree.get("board"));
+    boardActions.play(tree, gridX, gridY);
+  }
 });
 
 render(<Rooted />, global.document.getElementById('app'));

@@ -5,7 +5,8 @@ function playWithoutCommit(tree, gridX, gridY) {
   // check game is already finished
   if (tree.get("game", "finished")) return;
 
-  const { gridStates, players } = tree.get("constants");
+  const { gridStates } = tree.get("constants");
+  const players = tree.get("players");
   const turnPlayerCursor = tree.select("turnPlayer");
 
   // check play-able grid

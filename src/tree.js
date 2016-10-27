@@ -17,18 +17,18 @@ export const constants = {
   },
 };
 
-const players = {
-  1: {
+const players = [
+  {
     ...constants.players[0],
     manipulator: constants.manipulators.human
   },
-  2: {
+  {
     ...constants.players[1],
-    manipulator: constants.manipulators.human
+    manipulator: constants.manipulators.robot
   },
-};
+];
 
-const turnPlayer = players[1];
+const turnPlayer = players[0];
 
 const game = {
   constants: {

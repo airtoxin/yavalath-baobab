@@ -1,5 +1,4 @@
-import { find, findLast } from 'lodash';
-import { checkFinish } from '../logics/boardLogics';
+import { findLast } from 'lodash';
 
 export function enableHighlight(tree, highlightGrid) {
   tree.set(["highlight"], { ...highlightGrid, occupiedPlayer: { ...highlightGrid.occupiedPlayer, color: 'red' } });
@@ -23,7 +22,7 @@ export function historyBack(tree) {
   if (!tree.get(["game", "finished"])) {
     // back turn
     const turnPlayerCursor = tree.select("turnPlayer");
-    const players = tree.get("constants", "players");
+    const players = tree.get("players");
     const prevTurnPlayer = findLast(players, p => p.id !== turnPlayerCursor.get("id"));
     turnPlayerCursor.set(prevTurnPlayer);
   }

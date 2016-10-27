@@ -13,7 +13,9 @@ const Board = props => {
         state === gridStates.empty ? "white" :
         state === gridStates.occupied ? occupiedPlayer.color :
         "black"; // black is error...
-      const clickHandler = () => props.dispatch(boardActions.play, gridX, gridY);
+      const clickHandler = () => {
+        if (props.turnPlayer.manipulator === props.human) props.dispatch(boardActions.play, gridX, gridY);
+      }
 
       return <Grid key={`${gridX}-${gridY}`} x={x} y={y} size={gridSize} fill={fill} onClick={clickHandler} />
     }))
@@ -30,4 +32,6 @@ const Board = props => {
 export default branch({
   gridStates: ["constants", "gridStates"],
   gridSize: ["game", "constants", "gridSize"],
+  turnPlayer: ["turnPlayer"],
+  human: ["constants", "manipulators", "human"],
 }, Board);
