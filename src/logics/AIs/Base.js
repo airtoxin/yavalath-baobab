@@ -4,7 +4,12 @@ import { constants } from '../../tree';
 const { gridStates: { empty } } = constants;
 
 export default class Base {
-  step(board) {
+  constructor(id, constants) {
+    this.id = id;
+    Object.assign(this, constants);
+  }
+
+  step(state) {
     throw new Error("must override")
   }
 
