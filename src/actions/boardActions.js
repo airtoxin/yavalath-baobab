@@ -1,7 +1,8 @@
 import { find, findLast } from 'lodash';
 import { checkFinish } from '../logics/boardLogics';
+import { historyForwardWithoutCommit } from './historyActions';
 
-function playWithoutCommit(tree, gridX, gridY) {
+export function playWithoutCommit(tree, gridX, gridY) {
   // check game is already finished
   if (tree.get("game", "finished")) return;
 

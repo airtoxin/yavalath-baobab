@@ -1,4 +1,5 @@
 import { findLast } from 'lodash';
+import { playWithoutCommit } from './boardActions';
 
 export function enableHighlight(tree, highlightGrid) {
   tree.set(["highlight"], { ...highlightGrid, occupiedPlayer: { ...highlightGrid.occupiedPlayer, color: 'red' } });
@@ -40,7 +41,7 @@ export function historyBack(tree) {
   tree.commit();
 }
 
-function historyForwardWithoutCommit(tree) {
+export function historyForwardWithoutCommit(tree) {
   const hbHistoryCursor = tree.select(["historyBackHistory"]);
   const size = hbHistoryCursor.get().length;
   const lastBackedHistory = hbHistoryCursor.get(size - 1);

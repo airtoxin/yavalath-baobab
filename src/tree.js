@@ -20,7 +20,7 @@ export const constants = {
 const players = [
   {
     ...constants.players[0],
-    manipulator: constants.manipulators.human
+    manipulator: constants.manipulators.robot
   },
   {
     ...constants.players[1],
@@ -28,9 +28,10 @@ const players = [
   },
 ];
 
-const turnPlayer = players[0];
+const turnPlayer = null;
 
 const game = {
+  started: false,
   constants: {
     boardSize: 5,
     gridSize: 30,
@@ -69,6 +70,7 @@ const tree = new Baobab({
   highlight,
 }, {
   autoCommit: false,
+  asynchronous: false,
 });
 
 export default tree;
