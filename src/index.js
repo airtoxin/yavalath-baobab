@@ -12,8 +12,8 @@ const Rooted = root(tree, App);
 
 tree.get("players")
   .filter(p => p.manipulator === tree.get("constants", "manipulators", "robot"))
-  .map(robot => {
-    const ai = new HeuristicAI(robot.id, tree.get("constants"));
+  .forEach(robot => {
+    const ai = new HeuristicAI(robot, tree.get("constants"));
 
     tree.select("turnPlayer").on("update", updatee => {
       if (updatee.data.currentData.id === robot.id) {

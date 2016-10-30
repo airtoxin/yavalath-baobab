@@ -4,11 +4,11 @@ import { checkFinish } from '../boardLogics';
 
 export default class Heuristic extends Base {
   step({ board, players }) {
-    const otherPlayer = find(players, p => p.id !== this.id);
-    const shouldGuardGrid = this.searchCheckmate(board, otherPlayer);
-    if (shouldGuardGrid) return shouldGuardGrid;
+    const otherPlayer = find(players, p => p.id !== this.self.id);
     const shouldPlayGrid = this.searchCheckmate(board, this.self);
     if (shouldPlayGrid) return shouldPlayGrid;
+    const shouldGuardGrid = this.searchCheckmate(board, otherPlayer);
+    if (shouldGuardGrid) return shouldGuardGrid;
 
     return sample(this.omitSuicide(board));
   }

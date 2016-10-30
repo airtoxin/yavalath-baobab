@@ -4,9 +4,8 @@ import { constants } from '../../tree';
 const { gridStates: { empty } } = constants;
 
 export default class Base {
-  constructor(id, constants) {
-    this.id = id;
-    this.self = find(constants.players, p => p.id === id);
+  constructor(self, constants) {
+    this.self = self;
     Object.assign(this, constants);
   }
 
