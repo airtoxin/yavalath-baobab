@@ -1,2 +1,3 @@
-import Component from './component';
-export default Component;
+import Container from './container';
+
+export default Container;

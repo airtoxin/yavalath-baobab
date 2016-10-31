@@ -18,7 +18,7 @@ export default props => (
           className={styles.item}
           onMouseEnter={() => props.onMouseEnter(g)}
           onMouseLeave={() => props.onMouseLeave(g)}
-          style={{backgroundColor: g.occupiedPlayer.color}}
+          style={{ backgroundColor: g.occupiedPlayer.color }}
         >
           ({x},{y})
         </section>

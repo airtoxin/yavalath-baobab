@@ -1,7 +1,8 @@
+/* eslint-disable max-len */
 import { flatten } from 'lodash';
 import { constants } from '../tree';
 
-export const checkFinish = sortedGrids => {
+export const checkFinish = (sortedGrids) => {
   const filledGrids = flatten(sortedGrids).filter(({ state, occupiedPlayer }) => state === constants.gridStates.occupied && occupiedPlayer !== null);
 
   for (const { gridX, gridY, occupiedPlayer } of filledGrids) {
@@ -11,9 +12,9 @@ export const checkFinish = sortedGrids => {
       try {
         const isWin = isLose && sortedGrids[gridY][gridX + 3].occupiedPlayer.id === occupiedPlayer.id;
         if (isWin) return true;
-      } catch(e) {}
+      } catch (e) { /* pass */ }
       if (isLose) return false;
-    } catch(e) {}
+    } catch (e) { /* pass */ }
 
     /* pattern 2 (9 o'clock direction) */
     try {
@@ -21,9 +22,9 @@ export const checkFinish = sortedGrids => {
       try {
         const isWin = isLose && sortedGrids[gridY][gridX - 3].occupiedPlayer.id === occupiedPlayer.id;
         if (isWin) return true;
-      } catch(e) {}
+      } catch (e) { /* pass */ }
       if (isLose) return false;
-    } catch(e) {}
+    } catch (e) { /* pass */ }
 
     /* pattern 3 (5 o'clock direction) */
     try {
@@ -31,9 +32,9 @@ export const checkFinish = sortedGrids => {
       try {
         const isWin = isLose && sortedGrids[gridY + 3][gridX].occupiedPlayer.id === occupiedPlayer.id;
         if (isWin) return true;
-      } catch(e) {}
+      } catch (e) { /* pass */ }
       if (isLose) return false;
-    } catch(e) {}
+    } catch (e) { /* pass */ }
 
     /* pattern 4 (11 o'clock direction) */
     try {
@@ -41,9 +42,9 @@ export const checkFinish = sortedGrids => {
       try {
         const isWin = isLose && sortedGrids[gridY - 3][gridX].occupiedPlayer.id === occupiedPlayer.id;
         if (isWin) return true;
-      } catch(e) {}
+      } catch (e) { /* pass */ }
       if (isLose) return false;
-    } catch(e) {}
+    } catch (e) { /* pass */ }
 
     /* pattern 5 (1 o'clock direction) */
     try {
@@ -51,9 +52,9 @@ export const checkFinish = sortedGrids => {
       try {
         const isWin = isLose && sortedGrids[gridY - 3][gridX + 3].occupiedPlayer.id === occupiedPlayer.id;
         if (isWin) return true;
-      } catch(e) {}
+      } catch (e) { /* pass */ }
       if (isLose) return false;
-    } catch(e) {}
+    } catch (e) { /* pass */ }
 
     /* pattern 6 (1 o'clock direction) */
     try {
@@ -61,9 +62,9 @@ export const checkFinish = sortedGrids => {
       try {
         const isWin = isLose && sortedGrids[gridY + 3][gridX - 3].occupiedPlayer.id === occupiedPlayer.id;
         if (isWin) return true;
-      } catch(e) {}
+      } catch (e) { /* pass */ }
       if (isLose) return false;
-    } catch(e) {}
+    } catch (e) { /* pass */ }
   }
 
   return null;
@@ -71,8 +72,8 @@ export const checkFinish = sortedGrids => {
 
 export const convertToRecordGridSystem = ({ gridX, gridY }) => {
   let x = gridX;
-  let y = gridY;
+  const y = gridY;
 
   if (gridY < 4) x = gridX - (4 - gridY);
-  return { x: x +1, y: y + 1 };
+  return { x: x + 1, y: y + 1 };
 };

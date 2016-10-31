@@ -6,11 +6,11 @@ import { historyActions } from '../../actions';
 const Container = props => (
   <Component
     history={props.history}
-    onMouseEnter={(grid) => props.dispatch(historyActions.enableHighlight, grid)}
-    onMouseLeave={(grid) => props.dispatch(historyActions.disableHighlight, grid)}
+    onMouseEnter={grid => props.dispatch(historyActions.enableHighlight, grid)}
+    onMouseLeave={grid => props.dispatch(historyActions.disableHighlight, grid)}
   />
 );
 
 export default branch({
-  history: ["history"],
+  history: ['history'],
 }, Container);

@@ -24,6 +24,6 @@ class App extends Component {
 }
 
 export default branch({
-  started: ["game", "started"],
+  started: ['game', 'started'],
   board: ['board'],
 }, App);

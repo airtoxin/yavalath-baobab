@@ -1,40 +1,40 @@
-import { find, findLast } from 'lodash';
+import { find } from 'lodash';
 import { checkFinish } from '../logics/boardLogics';
 import { historyForwardWithoutCommit } from './historyActions';
 
 export function playWithoutCommit(tree, gridX, gridY) {
   // check game is already finished
-  if (tree.get("game", "finished")) return;
+  if (tree.get('game', 'finished')) return;
 
-  const { gridStates } = tree.get("constants");
-  const players = tree.get("players");
-  const turnPlayerCursor = tree.select("turnPlayer");
+  const { gridStates } = tree.get('constants');
+  const players = tree.get('players');
+  const turnPlayerCursor = tree.select('turnPlayer');
 
   // check play-able grid
-  const gridCursor = tree.select("board", gridY, gridX);
-  if (gridCursor.get("state") !== gridStates.empty) return;
-  if (gridCursor.get("occupiedPlayer", "id") === turnPlayerCursor.get("id")) return;
+  const gridCursor = tree.select('board', gridY, gridX);
+  if (gridCursor.get('state') !== gridStates.empty) return;
+  if (gridCursor.get('occupiedPlayer', 'id') === turnPlayerCursor.get('id')) return;
 
   // occupy grid
-  gridCursor.set(["state"], gridStates.occupied);
-  gridCursor.set(["occupiedPlayer"], turnPlayerCursor.get());
+  gridCursor.set(['state'], gridStates.occupied);
+  gridCursor.set(['occupiedPlayer'], turnPlayerCursor.get());
 
   // push history
-  tree.select("history").push(gridCursor.get());
+  tree.select('history').push(gridCursor.get());
 
   // check game is just finished
-  const nextTurnPlayer = find(players, p => p.id !== turnPlayerCursor.get("id"));
-  const finished = checkFinish(tree.get("board"));
+  const nextTurnPlayer = find(players, p => p.id !== turnPlayerCursor.get('id'));
+  const finished = checkFinish(tree.get('board'));
   if (finished !== null) {
     // game end
-    tree.set(["game", "finished"], true);
+    tree.set(['game', 'finished'], true);
 
     if (finished === true) {
       // turn player win
-      tree.set(["game", "winner"], turnPlayerCursor.get());
+      tree.set(['game', 'winner'], turnPlayerCursor.get());
     } else {
       // turn player lose
-      tree.set(["game", "winner"], nextTurnPlayer);
+      tree.set(['game', 'winner'], nextTurnPlayer);
     }
   } else {
     // next turn
@@ -43,7 +43,7 @@ export function playWithoutCommit(tree, gridX, gridY) {
 }
 
 export function play(tree, gridX, gridY) {
-  const hbHistoryCursor = tree.select(["historyBackHistory"]);
+  const hbHistoryCursor = tree.select(['historyBackHistory']);
   const size = hbHistoryCursor.get().length;
   const lastBackedHistory = hbHistoryCursor.get(size - 1);
 

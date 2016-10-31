@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 import Baobab from 'baobab';
 import lodash from 'lodash';
 import { gridPoint } from 'react-hex';
@@ -20,11 +21,11 @@ export const constants = {
 const players = [
   {
     ...constants.players[0],
-    manipulator: constants.manipulators.robot
+    manipulator: constants.manipulators.robot,
   },
   {
     ...constants.players[1],
-    manipulator: constants.manipulators.robot
+    manipulator: constants.manipulators.robot,
   },
 ];
 
@@ -43,19 +44,22 @@ const game = {
 const history = [];
 const historyBackHistory = [];
 
-const board = lodash.range(game.constants.boardSize * 2 - 1).map((gridY) => {
-  return lodash.range(game.constants.boardSize * 2 - 1).map((gridX) => {
+const board = lodash.range(game.constants.boardSize * 2 - 1).map(gridY => (
+  lodash.range(game.constants.boardSize * 2 - 1).map((gridX) => {
     const { center: [x, y] } = gridPoint('pointy-topped', game.constants.gridSize, gridX, gridY, 30, 30);
     return {
       x,
       y,
       gridX,
       gridY,
-      state: (gridX + gridY < game.constants.boardSize - 1) || (gridX + gridY >= game.constants.boardSize * 3 - 2) ? null : constants.gridStates.empty,
+      state:
+        (gridX + gridY < game.constants.boardSize - 1) ||
+        (gridX + gridY >= game.constants.boardSize * 3 - 2) ?
+        null : constants.gridStates.empty,
       occupiedPlayer: null,
     };
-  });
-});
+  })
+));
 
 const highlight = null;
 
