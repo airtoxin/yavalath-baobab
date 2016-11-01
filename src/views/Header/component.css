@@ -7,3 +7,35 @@
   background-color: black;
   color: white;
 }
+
+.flex {
+  display: flex;
+}
+
+.flexLeft {
+  margin-right: auto;
+}
+
+.flexRight {
+  padding-right: 1em;
+}
+
+.link-default {
+  color: white;
+}
+.link-link:link {
+  color: white;
+}
+.link-visited:visited {
+  color: white;
+}
+.link-hover:hover {
+  color: white;
+}
+.link-active:active {
+  color: white;
+}
+
+.link {
+  composes: link-default link-link link-visited link-hover link-active;
+}
