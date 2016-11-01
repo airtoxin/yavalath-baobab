@@ -1,0 +1,9 @@
+.noSpace {
+  padding: .5em;
+  margin: 0;
+}
+
+.black {
+  background-color: black;
+  color: white;
+}

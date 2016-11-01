@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { branch } from 'baobab-react/higher-order';
+import Header from '../Header';
 import Board from '../Board';
 import TurnPlayer from '../TurnPlayer';
 import Finished from '../Finished';
@@ -8,7 +9,7 @@ import { start } from '../../actions/gameActions';
 
 class App extends Component {
   render() {
-    const Comp = this.props.started ? (
+    const content = this.props.started ? (
       <div>
         <History />
         <TurnPlayer />
@@ -19,7 +20,12 @@ class App extends Component {
       <button onClick={() => this.props.dispatch(start)}>start</button>
     );
 
-    return Comp;
+    return (
+      <div>
+        <Header />
+        {content}
+      </div>
+    );
   }
 }
 
