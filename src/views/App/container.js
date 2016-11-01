@@ -5,7 +5,7 @@ import Board from '../Board';
 import TurnPlayer from '../TurnPlayer';
 import Finished from '../Finished';
 import History from '../History';
-import { start } from '../../actions/gameActions';
+import Settings from '../Settings';
 
 class App extends Component {
   render() {
@@ -16,9 +16,7 @@ class App extends Component {
         <Finished />
         <Board board={this.props.board} />
       </div>
-    ) : (
-      <button onClick={() => this.props.dispatch(start)}>start</button>
-    );
+    ) : <Settings />;
 
     return (
       <div>
