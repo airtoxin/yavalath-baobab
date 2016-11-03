@@ -1,7 +1,27 @@
 .switch {
-  position: relative;
-  line-height: 100%;
-  display: inline-block;
-  vertical-align: middle;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  width: 100%;
+  background-color: gray;
+  user-select: none;
+  color: white;
+}
+
+.labelBox {
+  flex-grow: 1;
+  padding: .3em;
+}
+
+.label {
   margin: 0;
+}
+
+.active {
+  background-color: #203240;
+  border-radius: 5px;
+}
+
+.inactive {
+  opacity: .4;
 }

@@ -21,7 +21,7 @@ export const constants = {
 const players = [
   {
     ...constants.players[0],
-    manipulator: constants.manipulators.robot,
+    manipulator: constants.manipulators.human,
   },
   {
     ...constants.players[1],

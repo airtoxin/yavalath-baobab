@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styles from './styles.css';
 
-export default function Switch({ onChange, id, left, right }) {
+export default function Switch({ labels, active, onChange=()=>{} }) {
+  const Labels = labels.map((l, i) => {
+    const isActive = active === i ? styles.active : styles.inactive;
+
+    return (
+      <div className={styles.labelBox} key={i} onClick={() => onChange(i)}>
+        <label className={`${styles.label} ${isActive}`}>{l}</label>
+      </div>
+    );
+  });
+
   return (
     <div className={styles.switch}>
-      <label htmlFor={id}>{left}</label>
-      <input
-        onChange={onChange}
-        id={id}
-        type="checkbox"
-        value="1" />
-      <label htmlFor={id} />
-      <label htmlFor={id}>{right}</label>
+      {Labels}
     </div>
   );
 }
+
+Switch.propTypes = {
+  labels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  active: PropTypes.number.isRequired,
+  onChange: PropTypes.func,
+};
