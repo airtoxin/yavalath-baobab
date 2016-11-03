@@ -2,7 +2,7 @@
 import { flatten } from 'lodash';
 import { constants } from '../tree';
 
-const checkLose = (sortedGrids, { gridX, gridY, occupiedPlayer }) => {
+export const checkLose = (sortedGrids, { gridX, gridY, occupiedPlayer }) => {
   /* pattern 1 (3 o'clock direction) */
   try {
     const isLose = (
@@ -54,7 +54,7 @@ const checkLose = (sortedGrids, { gridX, gridY, occupiedPlayer }) => {
   return false;
 };
 
-const checkWin = (sortedGrids, { gridX, gridY, occupiedPlayer }) => {
+export const checkWin = (sortedGrids, { gridX, gridY, occupiedPlayer }) => {
   /* pattern 1 (3 o'clock direction) */
   try {
     const isWin = (

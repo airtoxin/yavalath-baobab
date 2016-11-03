@@ -1,34 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { branch } from 'baobab-react/higher-order';
 import Button from '../../atoms/Button';
 import Player from '../../organisms/Player';
 import { gameActions } from '../../../actions';
 import styles from './styles.css';
 
-class Settings extends Component {
-  render() {
-    const Players = this.props.players.map((player, i) => {
+function Settings({ players, dispatch }) {
+  const Players = players.map((player, i) => (
+    <Player
+      key={i}
+      className={styles.playerManipulator}
+      player={player}
+      onChange={manipulator => dispatch(gameActions.setManipulator, player.id, manipulator)}
+    />
+  ));
 
-      return (
-        <Player
-          key={i}
-          className={styles.playerManipulator}
-          player={player}
-          onChange={manipulator => this.props.dispatch(gameActions.setManipulator, player.id, manipulator)}
-        />
-      );
-    });
-
-    return (
-      <div>
-        {Players}
-        <Button onClick={() => this.props.dispatch(gameActions.start)}>start</Button>
-      </div>
-    );
-  }
+  return (
+    <div>
+      {Players}
+      <Button onClick={() => dispatch(gameActions.start)}>start</Button>
+    </div>
+  );
 }
 
 export default branch({
-  players: ["players"],
-  manipulators: ["constants", "manipulators"],
+  players: ['players'],
+  manipulators: ['constants', 'manipulators'],
 }, Settings);

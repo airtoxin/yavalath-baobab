@@ -11,16 +11,14 @@ export default class ErrorView extends Component {
   }
 
   render() {
-    if (this.state.error) {
-      return (
+    return !this.state.error ?
+      this.props.children :
+      (
         <div>
           <h1>{this.state.error.name}</h1>
           <h2>{this.state.error.message}</h2>
           <pre>{this.state.error.stack}</pre>
         </div>
       );
-    } else {
-      return this.props.children;
-    }
   }
 }

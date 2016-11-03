@@ -9,7 +9,7 @@ import { boardActions } from './actions';
 
 const Rooted = root(tree, App);
 
-tree.select('game', 'started').on('update', updatee => {
+tree.select('game', 'started').on('update', (updatee) => {
   if (!updatee.target.get()) return;
 
   tree.get('players')
@@ -17,8 +17,8 @@ tree.select('game', 'started').on('update', updatee => {
     .forEach((robot) => {
       const ai = new HeuristicAI(robot, tree.get('constants'));
 
-      tree.select('turnPlayer').on('update', (updatee) => {
-        if (updatee.target.get().id === robot.id) {
+      tree.select('turnPlayer').on('update', (tpUpdatee) => {
+        if (tpUpdatee.target.get().id === robot.id) {
           setTimeout(() => {
             const { gridX, gridY } = ai.step(tree.get());
             boardActions.play(tree, gridX, gridY);
@@ -27,7 +27,7 @@ tree.select('game', 'started').on('update', updatee => {
       });
 
       // play if first turn player is robot
-      if (tree.get('turnPlayer', "manipulator") === tree.get("constants", "manipulators", "human")) return;
+      if (tree.get('turnPlayer', 'manipulator') === tree.get('constants', 'manipulators', 'human')) return;
       const { gridX, gridY } = ai.step(tree.get());
       boardActions.play(tree, gridX, gridY);
     });

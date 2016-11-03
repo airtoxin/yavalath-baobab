@@ -16,20 +16,25 @@ function getManipulator(index, manipulators) {
 }
 
 function Player({ manipulators, className, player, onChange }) {
-  const labels = ["Human", "Robot"];
+  const labels = ['Human', 'Robot'];
 
   return (
     <section className={`${className} ${styles.box}`}>
-      <label className={styles.label} style={{backgroundColor: player.color}}>{player.name}</label>
+      <label
+        className={styles.label}
+        style={{ backgroundColor: player.color }}
+        htmlFor={`${player.name} label`}
+      >{player.name}</label>
       <Switch
         className={styles.switch}
         labels={labels}
         active={getIndex(player.manipulator, manipulators)}
-        onChange={i => onChange(getManipulator(i, manipulators))}/>
+        onChange={i => onChange(getManipulator(i, manipulators))}
+      />
     </section>
   );
 }
 
 export default branch({
-  manipulators: ["constants", "manipulators"]
+  manipulators: ['constants', 'manipulators'],
 }, Player);

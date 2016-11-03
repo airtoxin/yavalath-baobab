@@ -1,14 +1,9 @@
 import React from 'react';
 import styles from './component.css';
 import { convertToRecordGridSystem } from '../../../logics/boardLogics';
-import Button from '../../atoms/Button';
 
-export default ({ history, onHistoryBack, onHistoryForward, onMouseEnter, onMouseLeave }) => (
+export default ({ history, onMouseEnter, onMouseLeave }) => (
   <div className={styles.container}>
-    {/* <div>
-      <Button onClick={onHistoryBack}>Back</Button>
-      <Button onClick={onHistoryForward}>Forward</Button>
-    </div> */}
     {history.map((g, i) => {
       const { x, y } = convertToRecordGridSystem(g);
       return (

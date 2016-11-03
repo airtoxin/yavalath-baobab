@@ -7,10 +7,11 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "dev": "webpack-dev-server",
-    "test:unit": "mocha --require jsdom-global/register --require ignore-styles --compilers jsx:babel-register --recursive test/unit",
+    "test:unit": "mocha --require jsdom-global/register --require ignore-styles --compilers babel-register --recursive test/unit",
     "test:lint": "eslint {src,test,webpack.config.babel.js} --fix",
     "test:e2e": "babel-node test/boot-e2e.js",
-    "test": "npm run test:lint && npm run test:unit && npm run test:e2e"
+    "test": "npm run test:lint && npm run test:unit && npm run test:e2e",
+    "train": "babel-node src/logics/train.js"
   },
   "repository": {
     "type": "git",
