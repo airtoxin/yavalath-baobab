@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { branch } from 'baobab-react/higher-order';
-import { start } from '../../actions/gameActions';
 import Button from '../atoms/Button';
 import Switch from '../atoms/Switch';
 import { gameActions } from '../../actions';
@@ -38,7 +37,7 @@ class Settings extends Component {
     return (
       <div>
         {PlayerManip}
-        <Button onClick={() => this.props.dispatch(start)}>start</Button>
+        <Button onClick={() => this.props.dispatch(gameActions.start)}>start</Button>
       </div>
     );
   }
