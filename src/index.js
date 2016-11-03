@@ -5,6 +5,7 @@ import tree from './tree';
 import ErrorView from './views/ErrorView';
 import App from './views/pages/App';
 import HeuristicAI from './logics/AIs/Heuristic';
+import MonteCarlo from './logics/AIs/MonteCarlo';
 import { boardActions } from './actions';
 
 const Rooted = root(tree, App);
@@ -14,8 +15,10 @@ tree.select('game', 'started').on('update', (updatee) => {
 
   tree.get('players')
     .filter(p => p.manipulator === tree.get('constants', 'manipulators', 'robot'))
-    .forEach((robot) => {
-      const ai = new HeuristicAI(robot, tree.get('constants'));
+    .forEach((robot, i) => {
+      const ai = i === 0 ?
+        new HeuristicAI(robot, tree.get('constants')) :
+        new MonteCarlo(robot, tree.get('constants'));
 
       tree.select('turnPlayer').on('update', (tpUpdatee) => {
         if (tpUpdatee.target.get().id === robot.id) {

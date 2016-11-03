@@ -2,26 +2,6 @@ import { sample, find } from 'lodash';
 import Base from './Base';
 import { checkFinish } from '../boardLogics';
 
-function set(i, value, xs) {
-  return [
-    ...xs.slice(0, i),
-    value,
-    ...xs.slice(i + 1),
-  ];
-}
-
-function setGrid(board, grid) {
-  return set(
-    grid.gridY,
-    set(
-      grid.gridX,
-      grid,
-      board[grid.gridY],
-    ),
-    board,
-  );
-}
-
 export default class Heuristic extends Base {
   step({ board, players }) {
     const otherPlayer = find(players, p => p.id !== this.self.id);
@@ -54,6 +34,6 @@ export default class Heuristic extends Base {
 
   simulatePlay(board, grid, player) {
     const copyGrid = { ...grid, state: this.gridStates.occupied, occupiedPlayer: player };
-    return setGrid(board, copyGrid);
+    return Base.setGrid(board, copyGrid);
   }
 }

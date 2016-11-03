@@ -14,4 +14,24 @@ export default class Base {
   getPlayableGrids(board) {
     return flatten(board).filter(g => g.state === this.gridStates.empty);
   }
+
+  static set(i, value, xs) {
+    return [
+      ...xs.slice(0, i),
+      value,
+      ...xs.slice(i + 1),
+    ];
+  }
+
+  static setGrid(board, grid) {
+    return Base.set(
+      grid.gridY,
+      Base.set(
+        grid.gridX,
+        grid,
+        board[grid.gridY],
+      ),
+      board,
+    );
+  }
 }
