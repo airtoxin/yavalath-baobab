@@ -1,16 +1,20 @@
-import { sample, find } from 'lodash';
+import { sample } from 'lodash';
 import Base from './Base';
 import { checkFinish } from '../boardLogics';
 
 export default class Heuristic extends Base {
-  step({ board, players }) {
-    const otherPlayer = find(players, p => p.id !== this.self.id);
-    const shouldPlayGrid = this.searchCheckmate(board, this.self);
+  step({ board }) {
+    const shouldPlayGrid = this.searchShouldPlayGrid(board);
     if (shouldPlayGrid) return shouldPlayGrid;
-    const shouldGuardGrid = this.searchCheckmate(board, otherPlayer);
-    if (shouldGuardGrid) return shouldGuardGrid;
 
     return sample(this.omitSuicide(board));
+  }
+
+  searchShouldPlayGrid(board) {
+    const shouldPlayGrid = this.searchCheckmate(board, this.self);
+    if (shouldPlayGrid) return shouldPlayGrid;
+    const shouldGuardGrid = this.searchCheckmate(board, this.enemy);
+    if (shouldGuardGrid) return shouldGuardGrid;
   }
 
   searchCheckmate(board, player) {
@@ -34,6 +38,6 @@ export default class Heuristic extends Base {
 
   simulatePlay(board, grid, player) {
     const copyGrid = { ...grid, state: this.gridStates.occupied, occupiedPlayer: player };
-    return Base.setGrid(board, copyGrid);
+    return Base.play(board, copyGrid);
   }
 }

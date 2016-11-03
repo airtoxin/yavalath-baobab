@@ -1,4 +1,5 @@
 import React from 'react';
+import { find } from 'lodash';
 import { render } from 'react-dom';
 import { root } from 'baobab-react/higher-order';
 import tree from './tree';
@@ -16,9 +17,9 @@ tree.select('game', 'started').on('update', (updatee) => {
   tree.get('players')
     .filter(p => p.manipulator === tree.get('constants', 'manipulators', 'robot'))
     .forEach((robot, i) => {
-      const ai = i === 0 ?
-        new HeuristicAI(robot, tree.get('constants')) :
-        new MonteCarlo(robot, tree.get('constants'));
+
+      const enemy = find(tree.get('players'), p => p.id !== robot.id);
+      const ai = new MonteCarlo(robot, enemy, tree.get('constants'));
 
       tree.select('turnPlayer').on('update', (tpUpdatee) => {
         if (tpUpdatee.target.get().id === robot.id) {

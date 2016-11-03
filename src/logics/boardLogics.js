@@ -127,6 +127,11 @@ export const checkFinish = (sortedGrids) => {
   return null;
 };
 
+export const checkDraw = (sortedGrids) => {
+  const emptyGrids = flatten(sortedGrids).filter(({ state }) => state === constants.gridStates.empty);
+  return emptyGrids.length === 0;
+}
+
 export const convertToRecordGridSystem = ({ gridX, gridY }) => {
   let x = gridX;
   const y = gridY;

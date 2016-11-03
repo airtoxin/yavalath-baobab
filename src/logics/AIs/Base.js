@@ -1,9 +1,10 @@
 /* eslint-disable class-methods-use-this */
-import { flatten } from 'lodash';
+import { flatten, find } from 'lodash';
 
 export default class Base {
-  constructor(self, constants) {
+  constructor(self, enemy, constants) {
     this.self = self;
+    this.enemy = enemy;
     Object.assign(this, constants);
   }
 
@@ -23,7 +24,7 @@ export default class Base {
     ];
   }
 
-  static setGrid(board, grid) {
+  static play(board, grid) {
     return Base.set(
       grid.gridY,
       Base.set(
