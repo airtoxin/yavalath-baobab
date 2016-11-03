@@ -1,9 +1,9 @@
 import React from 'react';
 import lodash from 'lodash';
 import { branch } from 'baobab-react/higher-order';
-import Grid from '../Grid';
-import Highlight from '../Highlight';
-import { boardActions } from '../../actions';
+import Grid from '../../molecules/Grid';
+import Highlight from '../../organisms/Highlight';
+import { boardActions } from '../../../actions';
 
 const Board = (props) => {
   const Grids = lodash.flatten(
@@ -43,6 +43,7 @@ const Board = (props) => {
 };
 
 export default branch({
+  board: ['board'],
   gridStates: ['constants', 'gridStates'],
   gridSize: ['game', 'constants', 'gridSize'],
   turnPlayer: ['turnPlayer'],

@@ -33,7 +33,8 @@
     "lodash": "4.16.4",
     "react": "15.3.2",
     "react-dom": "15.3.2",
-    "react-hex": "0.3.2"
+    "react-hex": "0.3.2",
+    "serialize-error": "2.0.0"
   },
   "devDependencies": {
     "babel-cli": "6.16.0",

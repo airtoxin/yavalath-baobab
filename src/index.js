@@ -2,7 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { root } from 'baobab-react/higher-order';
 import tree from './tree';
-import App from './views/App';
+import ErrorView from './views/ErrorView';
+import App from './views/pages/App';
 import HeuristicAI from './logics/AIs/Heuristic';
 import { boardActions } from './actions';
 
@@ -32,4 +33,4 @@ tree.select('game', 'started').on('update', updatee => {
     });
 });
 
-render(<Rooted />, global.document.getElementById('app'));
+render(<ErrorView><Rooted /></ErrorView>, global.document.getElementById('app'));
