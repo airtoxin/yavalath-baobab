@@ -6,6 +6,7 @@ import TurnPlayer from '../TurnPlayer';
 import Finished from '../Finished';
 import History from '../History';
 import Settings from '../Settings';
+import styles from './styles.css';
 
 class App extends Component {
   render() {
@@ -21,7 +22,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        {content}
+        <div className={styles.content}>{content}</div>
       </div>
     );
   }

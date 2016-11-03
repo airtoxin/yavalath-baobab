@@ -1,0 +1,7 @@
+.switch {
+  position: relative;
+  line-height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+}
