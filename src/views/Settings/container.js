@@ -4,6 +4,7 @@ import Button from '../atoms/Button';
 import Switch from '../atoms/Switch';
 import PlayerManipulator from '../PlayerManipulator';
 import { gameActions } from '../../actions';
+import styles from './styles.css';
 
 class Settings extends Component {
   getIndex(manipulator) {
@@ -28,6 +29,7 @@ class Settings extends Component {
         <PlayerManipulator
           key={i}
           id={i}
+          className={styles.playerManipulator}
           activeIndex={activeIndex}
           onChange={nextIdx => this.props.dispatch(gameActions.setManipulator, player.id, this.getManipulator(nextIdx))}
         />

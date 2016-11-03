@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styles from './styles.css';
 
-export default function Switch({ labels, active, onChange=()=>{} }) {
+export default function Switch({ labels, active, className, onChange=()=>{} }) {
   const Labels = labels.map((l, i) => {
     const isActive = active === i ? styles.active : styles.inactive;
 
@@ -13,7 +13,7 @@ export default function Switch({ labels, active, onChange=()=>{} }) {
   });
 
   return (
-    <div className={styles.switch}>
+    <div className={`${className} ${styles.switch}`}>
       {Labels}
     </div>
   );
