@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { branch } from 'baobab-react/higher-order';
 import Button from '../atoms/Button';
 import Switch from '../atoms/Switch';
+import PlayerManipulator from '../PlayerManipulator';
 import { gameActions } from '../../actions';
 
 class Settings extends Component {
@@ -24,13 +25,12 @@ class Settings extends Component {
       const activeIndex = this.getIndex(player.manipulator);
 
       return (
-        <section key={i}>
-          <p>Player {i}</p>
-          <Switch
-            labels={["Human", "Robot"]}
-            active={activeIndex}
-            onChange={nextIdx => this.props.dispatch(gameActions.setManipulator, player.id, this.getManipulator(nextIdx))}/>
-        </section>
+        <PlayerManipulator
+          key={i}
+          id={i}
+          activeIndex={activeIndex}
+          onChange={nextIdx => this.props.dispatch(gameActions.setManipulator, player.id, this.getManipulator(nextIdx))}
+        />
       );
     });
 

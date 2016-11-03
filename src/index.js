@@ -26,6 +26,7 @@ tree.select('game', 'started').on('update', updatee => {
       });
 
       // play if first turn player is robot
+      if (tree.get('turnPlayer', "manipulator") === tree.get("constants", "manipulators", "human")) return;
       const { gridX, gridY } = ai.step(tree.get());
       boardActions.play(tree, gridX, gridY);
     });
