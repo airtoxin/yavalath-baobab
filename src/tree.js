@@ -9,8 +9,8 @@ export const constants = {
     occupied: Symbol('occupied'),
   },
   players: [
-    { id: Symbol('red'), color: 'hotpink' },
-    { id: Symbol('blue'), color: 'steelblue' },
+    { id: Symbol('red'), name: 'Player 1', color: 'hotpink' },
+    { id: Symbol('blue'), name: 'Player 2', color: 'steelblue' },
   ],
   manipulators: {
     human: Symbol('human'),

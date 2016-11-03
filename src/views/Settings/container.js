@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { branch } from 'baobab-react/higher-order';
 import Button from '../atoms/Button';
 import Switch from '../atoms/Switch';
-import PlayerManipulator from '../PlayerManipulator';
+import Player from '../Player';
 import { gameActions } from '../../actions';
 import styles from './styles.css';
 
@@ -26,10 +26,10 @@ class Settings extends Component {
       const activeIndex = this.getIndex(player.manipulator);
 
       return (
-        <PlayerManipulator
+        <Player
           key={i}
-          id={i}
           className={styles.playerManipulator}
+          player={player}
           activeIndex={activeIndex}
           onChange={nextIdx => this.props.dispatch(gameActions.setManipulator, player.id, this.getManipulator(nextIdx))}
         />

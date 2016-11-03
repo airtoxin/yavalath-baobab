@@ -1,11 +1,12 @@
 .box {
   display: flex;
-  width: 400px;
+  width: 500px;
 }
 
 .label {
   flex-grow: 1;
-  margin: .3em 0 0;
+  padding: .4em .5em 0;
+  margin: 0 1em 0 0;
 }
 
 .switch {
