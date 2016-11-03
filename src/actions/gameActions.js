@@ -1,6 +1,5 @@
 import { findIndex } from 'lodash';
 
-let i = 0;
 export function setManipulator(tree, playerId, manipulator) {
   const playerIdx = findIndex(tree.get("players"), p => p.id === playerId);
   tree.set(["players", playerIdx, "manipulator"], manipulator);

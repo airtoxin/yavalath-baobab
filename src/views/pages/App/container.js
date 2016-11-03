@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { branch } from 'baobab-react/higher-order';
 import Header from '../../molecules/Header';
-import TurnPlayer from '../../organisms/TurnPlayer';
-import Finished from '../../organisms/Finished';
+import InfoBar from '../../organisms/InfoBar';
 import History from '../../organisms/History';
 import Board from '../Board';
 import Settings from '../Settings';
@@ -13,8 +12,7 @@ class App extends Component {
     const content = this.props.gameStarted ? (
       <div>
         <History />
-        <TurnPlayer />
-        <Finished />
+        <InfoBar />
         <Board />
       </div>
     ) : <Settings />;
