@@ -7,21 +7,22 @@ import { checkFinish, checkDraw } from '../boardLogics';
 export default class MonteCarlo extends Heuristic {
   constructor(self, enemy, constants) {
     super(self, enemy, constants);
+
     this.selfAi = new Random(self, enemy, constants);
     this.enemyAi = new Random(enemy, self, constants);
   }
 
   step({ board }) {
-    const shouldPlayGrid = this.searchShouldPlayGrid(board);
+    const shouldPlayGrid = super.searchShouldPlayGrid(board);
     if (shouldPlayGrid) return shouldPlayGrid;
 
     const gridWithScores = this.omitSuicide(board).map(grid =>
-      this.playoutAll(board, grid, 1000));
+      this.playouts(board, grid, 5));
     return gridWithScores.reduce((acc, curr) =>
       acc.score >= curr.score ? acc : curr).grid;
   }
 
-  playoutAll(board, grid, numTrials) {
+  playouts(board, grid, numTrials) {
     let trials = 0;
     let wins = 0;
 
@@ -39,7 +40,7 @@ export default class MonteCarlo extends Heuristic {
   }
 
   playout(board, playingGrid) {
-    let simBoard = super.simulatePlay(board, playingGrid, this.self);
+    let simBoard = this.simulatePlay(board, playingGrid, this.self);
     const alreadyFinished = checkFinish(simBoard);
     if (alreadyFinished !== null) {
       if (alreadyFinished === true) {
@@ -50,7 +51,9 @@ export default class MonteCarlo extends Heuristic {
     }
 
     while(1) {
-      simBoard = this.simulateEnemyPlay(simBoard);
+      // simulate enemy play
+      const enemyPlayedGrid = this.selfAi.step({ board: simBoard });
+      simBoard = this.simulatePlay(simBoard, enemyPlayedGrid, this.self);
       const finishedByEnemyPlay = checkFinish(simBoard);
       if (finishedByEnemyPlay !== null) {
         if (finishedByEnemyPlay === false) {
@@ -60,7 +63,11 @@ export default class MonteCarlo extends Heuristic {
         }
       }
 
-      simBoard = this.simulateSelfPlay(simBoard);
+      if (checkDraw(simBoard)) return 0;
+
+      // simulate self play
+      const playedGrid = this.enemyAi.step({ board: simBoard });
+      simBoard = this.simulatePlay(simBoard, playedGrid, this.enemy);
       const finishedByPlay = checkFinish(simBoard);
       if (finishedByPlay !== null) {
         if (finishedByPlay === true) {
@@ -72,13 +79,5 @@ export default class MonteCarlo extends Heuristic {
 
       if (checkDraw(simBoard)) return 0;
     }
-  }
-
-  simulateSelfPlay(board) {
-    return super.simulatePlay(board, this.selfAi.step({ board }), this.self);
-  }
-
-  simulateEnemyPlay(board) {
-    return super.simulatePlay(board, this.enemyAi.step({ board }), this.enemy);
   }
 }
