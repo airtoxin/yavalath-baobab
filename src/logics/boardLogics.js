@@ -2,24 +2,7 @@
 /* eslint-disable max-len */
 import { flatten } from 'lodash';
 import { constants } from '../tree';
-
-type Player = {
-  id: Symbol;
-};
-
-type Grid = {
-  gridX: number;
-  gridY: number;
-  occupiedPlayer: Player;
-};
-
-type Board = Array<Array<Grid>>;
-
-type FinishInfo = {
-  finished: boolean;
-  isWin?: boolean;
-  player?: Player;
-};
+import type { Player, Grid, Board, FinishInfo } from '../Types';
 
 export function isSamePlayerOccupied(sortedGrids: Board, { gridX, gridY, occupiedPlayer }: Grid, direction: number, hop: number) {
   try {
