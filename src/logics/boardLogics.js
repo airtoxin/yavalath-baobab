@@ -20,17 +20,17 @@ export function isSamePlayerOccupied(sortedGrids, { gridX, gridY, occupiedPlayer
       default:
         return false;
     }
-  } catch(e) {
+  } catch (e) {
     return false;
   }
 }
 
-export const checkBoard = sortedGrids => {
+export const checkBoard = (sortedGrids) => {
   const filledGrids = flatten(sortedGrids).filter(({ state, occupiedPlayer }) => state === constants.gridStates.occupied && occupiedPlayer !== null);
 
   let mayLose = false;
   let mayLosePlayer = null;
-  const win  = player => ({ finished: true, player, isWin: true });
+  const win = player => ({ finished: true, player, isWin: true });
   const lose = player => ({ finished: true, player, isWin: false });
 
   for (const grid of filledGrids) {
@@ -78,7 +78,7 @@ export const checkBoard = sortedGrids => {
 };
 
 export const checkFinish = (sortedGrids) => {
-  const { finished, player, isWin } = checkBoard(sortedGrids);
+  const { finished, isWin } = checkBoard(sortedGrids);
   if (finished) return isWin;
   return null;
 };
@@ -86,7 +86,7 @@ export const checkFinish = (sortedGrids) => {
 export const checkDraw = (sortedGrids) => {
   const emptyGrids = flatten(sortedGrids).filter(({ state }) => state === constants.gridStates.empty);
   return emptyGrids.length === 0;
-}
+};
 
 export const convertToRecordGridSystem = ({ gridX, gridY }) => {
   let x = gridX;

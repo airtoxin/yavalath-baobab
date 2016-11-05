@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { checkFinish } from '../../../src/logics/boardLogics';
+import { checkBoard } from '../../../src/logics/boardLogics';
 import { constants } from '../../../src/tree';
 
 const _ = null;
@@ -17,7 +17,7 @@ const createBoard = specs => (
   ))
 );
 
-describe('checkFinish', () => {
+describe('checkBoard', () => {
   it('x wins by 4 stones', () => {
     const board = createBoard([
       [x, o, x, x, x, x, o, _],
@@ -29,8 +29,10 @@ describe('checkFinish', () => {
                   [_, _, _, _, _, _, _, _],
                     [_, _, _, _, _, _, _, _],
     ]);
-    const result = checkFinish(board);
-    assert.strictEqual(result, true);
+    const { finished, player, isWin } = checkBoard(board);
+    assert.strictEqual(finished, true);
+    assert.deepEqual(player, { id: x });
+    assert.strictEqual(isWin, true);
   });
 
   it('x wins by 4 stones with o leech', () => {
@@ -44,8 +46,10 @@ describe('checkFinish', () => {
                   [_, _, _, _, _, _, _, _],
                     [_, _, _, _, _, _, _, _],
     ]);
-    const result = checkFinish(board);
-    assert.strictEqual(result, true);
+    const { finished, player, isWin } = checkBoard(board);
+    assert.strictEqual(finished, true);
+    assert.deepEqual(player, { id: x });
+    assert.strictEqual(isWin, true);
   });
 
   it('x wins by 5 stones', () => {
@@ -59,8 +63,10 @@ describe('checkFinish', () => {
                   [_, _, _, _, _, _, _, _],
                     [_, _, _, _, _, _, _, _],
     ]);
-    const result = checkFinish(board);
-    assert.strictEqual(result, true);
+    const { finished, player, isWin } = checkBoard(board);
+    assert.strictEqual(finished, true);
+    assert.deepEqual(player, { id: x });
+    assert.strictEqual(isWin, true);
   });
 
   it('x wins by 4 stones with 3 stones line', () => {
@@ -74,8 +80,10 @@ describe('checkFinish', () => {
                   [_, _, _, _, _, _, _, _],
                     [_, _, _, _, _, _, _, _],
     ]);
-    const result = checkFinish(board);
-    assert.strictEqual(result, true);
+    const { finished, player, isWin } = checkBoard(board);
+    assert.strictEqual(finished, true);
+    assert.deepEqual(player, { id: x });
+    assert.strictEqual(isWin, true);
   });
 
   it('x lose by 3 stones', () => {
@@ -89,8 +97,10 @@ describe('checkFinish', () => {
                   [_, _, _, _, _, _, _, _],
                     [_, _, _, _, _, _, _, _],
     ]);
-    const result = checkFinish(board);
-    assert.strictEqual(result, false);
+    const { finished, player, isWin } = checkBoard(board);
+    assert.strictEqual(finished, true);
+    assert.deepEqual(player, { id: x });
+    assert.strictEqual(isWin, false);
   });
 
   it('o win by 4 stones', () => {
@@ -104,8 +114,10 @@ describe('checkFinish', () => {
                   [_, _, _, _, _, _, _, _],
                     [_, _, _, _, _, _, _, _],
     ]);
-    const result = checkFinish(board);
-    assert.strictEqual(result, true);
+    const { finished, player, isWin } = checkBoard(board);
+    assert.strictEqual(finished, true);
+    assert.deepEqual(player, { id: o });
+    assert.strictEqual(isWin, true);
   });
 
   it('no winner no loser', () => {
@@ -119,8 +131,8 @@ describe('checkFinish', () => {
                   [o, o, x, x, o, o, x, x],
                     [x, x, o, o, x, x, o, o],
     ]);
-    const result = checkFinish(board);
-    assert.strictEqual(result, null);
+    const { finished } = checkBoard(board);
+    assert.strictEqual(finished, false);
   });
 
   it('empty x board', () => {
@@ -134,8 +146,8 @@ describe('checkFinish', () => {
                   [o, o, _, _, o, o, _, _],
                     [_, _, o, o, _, _, o, o],
     ]);
-    const result = checkFinish(board);
-    assert.strictEqual(result, null);
+    const { finished } = checkBoard(board);
+    assert.strictEqual(finished, false);
   });
 
   it('empty o board', () => {
@@ -149,8 +161,8 @@ describe('checkFinish', () => {
                   [_, _, x, x, _, _, x, x],
                     [x, x, _, _, x, x, _, _],
     ]);
-    const result = checkFinish(board);
-    assert.strictEqual(result, null);
+    const { finished } = checkBoard(board);
+    assert.strictEqual(finished, false);
   });
 
   it('empty board', () => {
@@ -164,7 +176,7 @@ describe('checkFinish', () => {
                   [_, _, _, _, _, _, _, _],
                     [_, _, _, _, _, _, _, _],
     ]);
-    const result = checkFinish(board);
-    assert.strictEqual(result, null);
+    const { finished } = checkBoard(board);
+    assert.strictEqual(finished, false);
   });
 });

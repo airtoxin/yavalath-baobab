@@ -28,14 +28,14 @@ export default class MonteCarlo extends Heuristic {
 
     while (trials < numTrials) {
       trials++;
-      console.log("@trials", trials);
+      console.log('@trials', trials);
       wins += this.playout(board, grid);
     }
 
     const score = wins / trials;
     return {
       grid,
-      score
+      score,
     };
   }
 
@@ -50,7 +50,7 @@ export default class MonteCarlo extends Heuristic {
       }
     }
 
-    while(1) {
+    while (1) {
       // simulate enemy play
       const enemyPlayedGrid = this.selfAi.step({ board: simBoard });
       simBoard = this.simulatePlay(simBoard, enemyPlayedGrid, this.self);
