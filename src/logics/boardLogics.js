@@ -25,36 +25,6 @@ export function isSamePlayerOccupied(sortedGrids, { gridX, gridY, occupiedPlayer
   }
 }
 
-export const checkLose = (sortedGrids, grid) => (
-  /* pattern 1 (3 o'clock direction) */
-  (isSamePlayerOccupied(sortedGrids, grid, 3, 1) && isSamePlayerOccupied(sortedGrids, grid, 3, 2)) ||
-  /* pattern 2 (9 o'clock direction) */
-  (isSamePlayerOccupied(sortedGrids, grid, 9, 1) && isSamePlayerOccupied(sortedGrids, grid, 9, 2)) ||
-  /* pattern 3 (5 o'clock direction) */
-  (isSamePlayerOccupied(sortedGrids, grid, 5, 1) && isSamePlayerOccupied(sortedGrids, grid, 5, 2)) ||
-  /* pattern 4 (11 o'clock direction) */
-  (isSamePlayerOccupied(sortedGrids, grid, 11, 1) && isSamePlayerOccupied(sortedGrids, grid, 11, 2)) ||
-  /* pattern 5 (1 o'clock direction) */
-  (isSamePlayerOccupied(sortedGrids, grid, 1, 1) && isSamePlayerOccupied(sortedGrids, grid, 1, 2)) ||
-  /* pattern 6 (7 o'clock direction) */
-  (isSamePlayerOccupied(sortedGrids, grid, 7, 1) && isSamePlayerOccupied(sortedGrids, grid, 7, 2))
-);
-
-export const checkWin = (sortedGrids, grid) => (
-  /* pattern 1 (3 o'clock direction) */
-  (isSamePlayerOccupied(sortedGrids, grid, 3, 1) && isSamePlayerOccupied(sortedGrids, grid, 3, 2) && isSamePlayerOccupied(sortedGrids, grid, 3, 3)) ||
-  /* pattern 2 (9 o'clock direction) */
-  (isSamePlayerOccupied(sortedGrids, grid, 9, 1) && isSamePlayerOccupied(sortedGrids, grid, 9, 2) && isSamePlayerOccupied(sortedGrids, grid, 9, 3)) ||
-  /* pattern 3 (5 o'clock direction) */
-  (isSamePlayerOccupied(sortedGrids, grid, 5, 1) && isSamePlayerOccupied(sortedGrids, grid, 5, 2) && isSamePlayerOccupied(sortedGrids, grid, 5, 3)) ||
-  /* pattern 4 (11 o'clock direction) */
-  (isSamePlayerOccupied(sortedGrids, grid, 11, 1) && isSamePlayerOccupied(sortedGrids, grid, 11, 2) && isSamePlayerOccupied(sortedGrids, grid, 11, 3)) ||
-  /* pattern 5 (1 o'clock direction) */
-  (isSamePlayerOccupied(sortedGrids, grid, 1, 1) && isSamePlayerOccupied(sortedGrids, grid, 1, 2) && isSamePlayerOccupied(sortedGrids, grid, 1, 3)) ||
-  /* pattern 6 (7 o'clock direction) */
-  (isSamePlayerOccupied(sortedGrids, grid, 7, 1) && isSamePlayerOccupied(sortedGrids, grid, 7, 2) && isSamePlayerOccupied(sortedGrids, grid, 7, 3))
-);
-
 export const checkBoard = sortedGrids => {
   const filledGrids = flatten(sortedGrids).filter(({ state, occupiedPlayer }) => state === constants.gridStates.occupied && occupiedPlayer !== null);
 
