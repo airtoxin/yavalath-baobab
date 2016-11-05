@@ -17,7 +17,7 @@ export default class MonteCarlo extends Heuristic {
     if (shouldPlayGrid) return shouldPlayGrid;
 
     const gridWithScores = this.getPlayableGrids(board).map(grid =>
-      this.playouts(board, grid, 5));
+      this.playouts(board, grid, 10));
     return gridWithScores.reduce((acc, curr) =>
       acc.score >= curr.score ? acc : curr).grid;
   }
@@ -46,7 +46,7 @@ export default class MonteCarlo extends Heuristic {
       if (alreadyFinished === true) {
         return 1;
       } else {
-        return 0;
+        return -1;
       }
     }
 
@@ -59,7 +59,7 @@ export default class MonteCarlo extends Heuristic {
         if (finishedByEnemyPlay === false) {
           return 1;
         } else {
-          return 0;
+          return -1;
         }
       }
 
@@ -73,7 +73,7 @@ export default class MonteCarlo extends Heuristic {
         if (finishedByPlay === true) {
           return 1;
         } else {
-          return 0;
+          return -1;
         }
       }
 
