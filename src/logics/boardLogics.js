@@ -2,128 +2,114 @@
 import { flatten } from 'lodash';
 import { constants } from '../tree';
 
-export const checkLose = (sortedGrids, { gridX, gridY, occupiedPlayer }) => {
+export function isSamePlayerOccupied(sortedGrids, { gridX, gridY, occupiedPlayer }, direction, hop) {
+  try {
+    switch (direction) {
+      case 3: // →
+        return sortedGrids[gridY][gridX + hop].occupiedPlayer.id === occupiedPlayer.id;
+      case 9: // ←
+        return sortedGrids[gridY][gridX - hop].occupiedPlayer.id === occupiedPlayer.id;
+      case 5: // ↘
+        return sortedGrids[gridY + hop][gridX].occupiedPlayer.id === occupiedPlayer.id;
+      case 11: // ↖
+        return sortedGrids[gridY - hop][gridX].occupiedPlayer.id === occupiedPlayer.id;
+      case 1: // ↗
+        return sortedGrids[gridY - hop][gridX + hop].occupiedPlayer.id === occupiedPlayer.id;
+      case 7: // ↙
+        return sortedGrids[gridY + hop][gridX - hop].occupiedPlayer.id === occupiedPlayer.id;
+      default:
+        return false;
+    }
+  } catch(e) {
+    return false;
+  }
+}
+
+export const checkLose = (sortedGrids, grid) => (
   /* pattern 1 (3 o'clock direction) */
-  try {
-    const isLose = (
-      sortedGrids[gridY][gridX + 1].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY][gridX + 2].occupiedPlayer.id === occupiedPlayer.id);
-    if (isLose) return true;
-  } catch (e) { /* pass */ }
-
+  (isSamePlayerOccupied(sortedGrids, grid, 3, 1) && isSamePlayerOccupied(sortedGrids, grid, 3, 2)) ||
   /* pattern 2 (9 o'clock direction) */
-  try {
-    const isLose = (
-      sortedGrids[gridY][gridX - 1].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY][gridX - 2].occupiedPlayer.id === occupiedPlayer.id);
-    if (isLose) return true;
-  } catch (e) { /* pass */ }
-
+  (isSamePlayerOccupied(sortedGrids, grid, 9, 1) && isSamePlayerOccupied(sortedGrids, grid, 9, 2)) ||
   /* pattern 3 (5 o'clock direction) */
-  try {
-    const isLose = (
-      sortedGrids[gridY + 1][gridX].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY + 2][gridX].occupiedPlayer.id === occupiedPlayer.id);
-    if (isLose) return true;
-  } catch (e) { /* pass */ }
-
+  (isSamePlayerOccupied(sortedGrids, grid, 5, 1) && isSamePlayerOccupied(sortedGrids, grid, 5, 2)) ||
   /* pattern 4 (11 o'clock direction) */
-  try {
-    const isLose = (
-      sortedGrids[gridY - 1][gridX].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY - 2][gridX].occupiedPlayer.id === occupiedPlayer.id);
-    if (isLose) return true;
-  } catch (e) { /* pass */ }
-
+  (isSamePlayerOccupied(sortedGrids, grid, 11, 1) && isSamePlayerOccupied(sortedGrids, grid, 11, 2)) ||
   /* pattern 5 (1 o'clock direction) */
-  try {
-    const isLose = (
-      sortedGrids[gridY - 1][gridX + 1].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY - 2][gridX + 2].occupiedPlayer.id === occupiedPlayer.id);
-    if (isLose) return true;
-  } catch (e) { /* pass */ }
-
+  (isSamePlayerOccupied(sortedGrids, grid, 1, 1) && isSamePlayerOccupied(sortedGrids, grid, 1, 2)) ||
   /* pattern 6 (7 o'clock direction) */
-  try {
-    const isLose = (
-      sortedGrids[gridY + 1][gridX - 1].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY + 2][gridX - 2].occupiedPlayer.id === occupiedPlayer.id);
-    if (isLose) return true;
-  } catch (e) { /* pass */ }
+  (isSamePlayerOccupied(sortedGrids, grid, 7, 1) && isSamePlayerOccupied(sortedGrids, grid, 7, 2))
+);
 
-  return false;
-};
-
-export const checkWin = (sortedGrids, { gridX, gridY, occupiedPlayer }) => {
+export const checkWin = (sortedGrids, grid) => (
   /* pattern 1 (3 o'clock direction) */
-  try {
-    const isWin = (
-      sortedGrids[gridY][gridX + 1].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY][gridX + 2].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY][gridX + 3].occupiedPlayer.id === occupiedPlayer.id);
-    if (isWin) return true;
-  } catch (e) { /* pass */ }
-
+  (isSamePlayerOccupied(sortedGrids, grid, 3, 1) && isSamePlayerOccupied(sortedGrids, grid, 3, 2) && isSamePlayerOccupied(sortedGrids, grid, 3, 3)) ||
   /* pattern 2 (9 o'clock direction) */
-  try {
-    const isWin = (
-      sortedGrids[gridY][gridX - 1].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY][gridX - 2].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY][gridX - 3].occupiedPlayer.id === occupiedPlayer.id);
-    if (isWin) return true;
-  } catch (e) { /* pass */ }
-
+  (isSamePlayerOccupied(sortedGrids, grid, 9, 1) && isSamePlayerOccupied(sortedGrids, grid, 9, 2) && isSamePlayerOccupied(sortedGrids, grid, 9, 3)) ||
   /* pattern 3 (5 o'clock direction) */
-  try {
-    const isWin = (
-      sortedGrids[gridY + 1][gridX].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY + 2][gridX].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY + 3][gridX].occupiedPlayer.id === occupiedPlayer.id);
-    if (isWin) return true;
-  } catch (e) { /* pass */ }
-
+  (isSamePlayerOccupied(sortedGrids, grid, 5, 1) && isSamePlayerOccupied(sortedGrids, grid, 5, 2) && isSamePlayerOccupied(sortedGrids, grid, 5, 3)) ||
   /* pattern 4 (11 o'clock direction) */
-  try {
-    const isWin = (
-      sortedGrids[gridY - 1][gridX].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY - 2][gridX].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY - 3][gridX].occupiedPlayer.id === occupiedPlayer.id);
-    if (isWin) return true;
-  } catch (e) { /* pass */ }
-
+  (isSamePlayerOccupied(sortedGrids, grid, 11, 1) && isSamePlayerOccupied(sortedGrids, grid, 11, 2) && isSamePlayerOccupied(sortedGrids, grid, 11, 3)) ||
   /* pattern 5 (1 o'clock direction) */
-  try {
-    const isWin = (
-      sortedGrids[gridY - 1][gridX + 1].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY - 2][gridX + 2].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY - 3][gridX + 3].occupiedPlayer.id === occupiedPlayer.id);
-    if (isWin) return true;
-  } catch (e) { /* pass */ }
-
+  (isSamePlayerOccupied(sortedGrids, grid, 1, 1) && isSamePlayerOccupied(sortedGrids, grid, 1, 2) && isSamePlayerOccupied(sortedGrids, grid, 1, 3)) ||
   /* pattern 6 (7 o'clock direction) */
-  try {
-    const isWin = (
-      sortedGrids[gridY + 1][gridX - 1].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY + 2][gridX - 2].occupiedPlayer.id === occupiedPlayer.id &&
-      sortedGrids[gridY + 3][gridX - 3].occupiedPlayer.id === occupiedPlayer.id);
-    if (isWin) return true;
-  } catch (e) { /* pass */ }
+  (isSamePlayerOccupied(sortedGrids, grid, 7, 1) && isSamePlayerOccupied(sortedGrids, grid, 7, 2) && isSamePlayerOccupied(sortedGrids, grid, 7, 3))
+);
 
-  return false;
+export const checkBoard = sortedGrids => {
+  const filledGrids = flatten(sortedGrids).filter(({ state, occupiedPlayer }) => state === constants.gridStates.occupied && occupiedPlayer !== null);
+
+  let mayLose = false;
+  let mayLosePlayer = null;
+  const win  = player => ({ finished: true, player, isWin: true });
+  const lose = player => ({ finished: true, player, isWin: false });
+
+  for (const grid of filledGrids) {
+    /* pattern 1 (3 o'clock direction) */
+    if (isSamePlayerOccupied(sortedGrids, grid, 3, 1) && isSamePlayerOccupied(sortedGrids, grid, 3, 2)) {
+      if (isSamePlayerOccupied(sortedGrids, grid, 3, 3)) return win(grid.occupiedPlayer);
+      mayLose = true;
+      mayLosePlayer = grid.occupiedPlayer;
+    }
+    /* pattern 2 (9 o'clock direction) */
+    if (isSamePlayerOccupied(sortedGrids, grid, 9, 1) && isSamePlayerOccupied(sortedGrids, grid, 9, 2)) {
+      if (isSamePlayerOccupied(sortedGrids, grid, 9, 3)) return win(grid.occupiedPlayer);
+      mayLose = true;
+      mayLosePlayer = grid.occupiedPlayer;
+    }
+    /* pattern 3 (5 o'clock direction) */
+    if (isSamePlayerOccupied(sortedGrids, grid, 5, 1) && isSamePlayerOccupied(sortedGrids, grid, 5, 2)) {
+      if (isSamePlayerOccupied(sortedGrids, grid, 5, 3)) return win(grid.occupiedPlayer);
+      mayLose = true;
+      mayLosePlayer = grid.occupiedPlayer;
+    }
+    /* pattern 4 (11 o'clock direction) */
+    if (isSamePlayerOccupied(sortedGrids, grid, 11, 1) && isSamePlayerOccupied(sortedGrids, grid, 11, 2)) {
+      if (isSamePlayerOccupied(sortedGrids, grid, 11, 3)) return win(grid.occupiedPlayer);
+      mayLose = true;
+      mayLosePlayer = grid.occupiedPlayer;
+    }
+    /* pattern 5 (1 o'clock direction) */
+    if (isSamePlayerOccupied(sortedGrids, grid, 1, 1) && isSamePlayerOccupied(sortedGrids, grid, 1, 2)) {
+      if (isSamePlayerOccupied(sortedGrids, grid, 1, 3)) return win(grid.occupiedPlayer);
+      mayLose = true;
+      mayLosePlayer = grid.occupiedPlayer;
+    }
+    /* pattern 6 (7 o'clock direction) */
+    if (isSamePlayerOccupied(sortedGrids, grid, 7, 1) && isSamePlayerOccupied(sortedGrids, grid, 7, 2)) {
+      if (isSamePlayerOccupied(sortedGrids, grid, 7, 3)) return win(grid.occupiedPlayer);
+      mayLose = true;
+      mayLosePlayer = grid.occupiedPlayer;
+    }
+  }
+
+  if (mayLose) return lose(mayLosePlayer);
+
+  return { finished: false };
 };
 
 export const checkFinish = (sortedGrids) => {
-  const filledGrids = flatten(sortedGrids).filter(({ state, occupiedPlayer }) => state === constants.gridStates.occupied && occupiedPlayer !== null);
-
-  let losing = null;
-
-  for (const filledGrid of filledGrids) {
-    if (checkWin(sortedGrids, filledGrid)) return true;
-    if (checkLose(sortedGrids, filledGrid)) losing = true;
-  }
-
-  if (losing) return false;
-
+  const { finished, player, isWin } = checkBoard(sortedGrids);
+  if (finished) return isWin;
   return null;
 };
 
