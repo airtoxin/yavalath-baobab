@@ -16,7 +16,7 @@ export default class MonteCarlo extends Heuristic {
     const shouldPlayGrid = super.searchShouldPlayGrid(board);
     if (shouldPlayGrid) return shouldPlayGrid;
 
-    const gridWithScores = this.omitSuicide(board).map(grid =>
+    const gridWithScores = this.getPlayableGrids(board).map(grid =>
       this.playouts(board, grid, 5));
     return gridWithScores.reduce((acc, curr) =>
       acc.score >= curr.score ? acc : curr).grid;
