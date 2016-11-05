@@ -1,8 +1,27 @@
+// @flow
 /* eslint-disable max-len */
 import { flatten } from 'lodash';
 import { constants } from '../tree';
 
-export function isSamePlayerOccupied(sortedGrids, { gridX, gridY, occupiedPlayer }, direction, hop) {
+type Player = {
+  id: Symbol;
+};
+
+type Grid = {
+  gridX: number;
+  gridY: number;
+  occupiedPlayer: Player;
+};
+
+type Board = Array<Array<Grid>>;
+
+type FinishInfo = {
+  finished: boolean;
+  isWin?: boolean;
+  player?: Player;
+};
+
+export function isSamePlayerOccupied(sortedGrids: Board, { gridX, gridY, occupiedPlayer }: Grid, direction: number, hop: number) {
   try {
     switch (direction) {
       case 3: // →
@@ -25,70 +44,67 @@ export function isSamePlayerOccupied(sortedGrids, { gridX, gridY, occupiedPlayer
   }
 }
 
-export const checkBoard = (sortedGrids) => {
+export function checkBoard(sortedGrids: Board): FinishInfo {
   const filledGrids = flatten(sortedGrids).filter(({ state, occupiedPlayer }) => state === constants.gridStates.occupied && occupiedPlayer !== null);
 
-  let mayLose = false;
-  let mayLosePlayer = null;
-  const win = player => ({ finished: true, player, isWin: true });
-  const lose = player => ({ finished: true, player, isWin: false });
+  let mayLosePlayer: Player | null = null;
+  function win(player: Player): FinishInfo {
+    return { finished: true, player, isWin: true };
+  }
+  function lose(player: Player): FinishInfo {
+    return { finished: true, player, isWin: false };
+  }
 
   for (const grid of filledGrids) {
     /* pattern 1 (3 o'clock direction) */
     if (isSamePlayerOccupied(sortedGrids, grid, 3, 1) && isSamePlayerOccupied(sortedGrids, grid, 3, 2)) {
       if (isSamePlayerOccupied(sortedGrids, grid, 3, 3)) return win(grid.occupiedPlayer);
-      mayLose = true;
       mayLosePlayer = grid.occupiedPlayer;
     }
     /* pattern 2 (9 o'clock direction) */
     if (isSamePlayerOccupied(sortedGrids, grid, 9, 1) && isSamePlayerOccupied(sortedGrids, grid, 9, 2)) {
       if (isSamePlayerOccupied(sortedGrids, grid, 9, 3)) return win(grid.occupiedPlayer);
-      mayLose = true;
       mayLosePlayer = grid.occupiedPlayer;
     }
     /* pattern 3 (5 o'clock direction) */
     if (isSamePlayerOccupied(sortedGrids, grid, 5, 1) && isSamePlayerOccupied(sortedGrids, grid, 5, 2)) {
       if (isSamePlayerOccupied(sortedGrids, grid, 5, 3)) return win(grid.occupiedPlayer);
-      mayLose = true;
       mayLosePlayer = grid.occupiedPlayer;
     }
     /* pattern 4 (11 o'clock direction) */
     if (isSamePlayerOccupied(sortedGrids, grid, 11, 1) && isSamePlayerOccupied(sortedGrids, grid, 11, 2)) {
       if (isSamePlayerOccupied(sortedGrids, grid, 11, 3)) return win(grid.occupiedPlayer);
-      mayLose = true;
       mayLosePlayer = grid.occupiedPlayer;
     }
     /* pattern 5 (1 o'clock direction) */
     if (isSamePlayerOccupied(sortedGrids, grid, 1, 1) && isSamePlayerOccupied(sortedGrids, grid, 1, 2)) {
       if (isSamePlayerOccupied(sortedGrids, grid, 1, 3)) return win(grid.occupiedPlayer);
-      mayLose = true;
       mayLosePlayer = grid.occupiedPlayer;
     }
     /* pattern 6 (7 o'clock direction) */
     if (isSamePlayerOccupied(sortedGrids, grid, 7, 1) && isSamePlayerOccupied(sortedGrids, grid, 7, 2)) {
       if (isSamePlayerOccupied(sortedGrids, grid, 7, 3)) return win(grid.occupiedPlayer);
-      mayLose = true;
       mayLosePlayer = grid.occupiedPlayer;
     }
   }
 
-  if (mayLose) return lose(mayLosePlayer);
+  if (mayLosePlayer !== null) return lose(mayLosePlayer);
 
   return { finished: false };
 };
 
-export const checkFinish = (sortedGrids) => {
+export const checkFinish = (sortedGrids: Board) => {
   const { finished, isWin } = checkBoard(sortedGrids);
   if (finished) return isWin;
   return null;
 };
 
-export const checkDraw = (sortedGrids) => {
+export const checkDraw = (sortedGrids: Board) => {
   const emptyGrids = flatten(sortedGrids).filter(({ state }) => state === constants.gridStates.empty);
   return emptyGrids.length === 0;
 };
 
-export const convertToRecordGridSystem = ({ gridX, gridY }) => {
+export const convertToRecordGridSystem = ({ gridX, gridY }: Grid) => {
   let x = gridX;
   const y = gridY;
 
