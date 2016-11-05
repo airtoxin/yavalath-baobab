@@ -8,6 +8,9 @@ import App from './views/pages/App';
 import HeuristicAI from './logics/AIs/Heuristic';
 import MonteCarlo from './logics/AIs/MonteCarlo';
 import { boardActions } from './actions';
+import Remote from './remote';
+
+new Remote();
 
 const Rooted = root(tree, App);
 

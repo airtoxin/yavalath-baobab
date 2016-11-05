@@ -8,6 +8,7 @@
   ],
   "plugins": [
     "transform-flow-strip-types",
+    "transform-inline-environment-variables",
     "transform-runtime"
   ]
 }
