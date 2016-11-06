@@ -77,7 +77,7 @@ const tree = new Baobab({
   highlight,
   rooms,
 }, {
-  autoCommit: true,
+  autoCommit: false,
   asynchronous: true,
 });
 

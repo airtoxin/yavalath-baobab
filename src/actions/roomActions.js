@@ -5,3 +5,7 @@ export function addRoom(tree, name) {
   tree.set(["rooms", id], name);
   tree.commit();
 }
+
+export function startGame(tree, id) {
+  console.log("@id", id);
+}

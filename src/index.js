@@ -18,7 +18,10 @@ const connect = (refPath, selector, defaultValue) => {
   const ref = remote.db.ref(refPath);
   const cursor = tree.select(selector);
 
-  ref.on('value', snapshot => cursor.set(snapshot.val() || defaultValue));
+  ref.on('value', snapshot => {
+    cursor.set(snapshot.val() || defaultValue);
+    tree.commit();
+  });
   cursor.on('update', updatee => ref.set(updatee.target.get() || defaultValue));
 }
 

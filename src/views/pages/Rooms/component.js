@@ -25,7 +25,7 @@ export default class Rooms extends Component {
 
         <ul>
           {Object.entries(this.props.rooms).map(([id, name]) => (
-            <Room key={id} id={id} name={name}/>
+            <Room key={id} id={id} name={name} onClick={() => this.props.onSelectRoom(id)}/>
           ))}
         </ul>
       </div>
@@ -37,12 +37,13 @@ export default class Rooms extends Component {
   }
 
   handleClick() {
-    this.props.onClick(this.state.name);
+    this.props.onAddRoom(this.state.name);
     this.setState({ name: '' })
   }
 }
 
 Rooms.propTypes = {
-  onClick: PropTypes.func,
+  onAddRoom: PropTypes.func,
+  onSelectRoom: PropTypes.func,
   rooms: PropTypes.object,
 };
