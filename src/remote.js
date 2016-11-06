@@ -1,6 +1,11 @@
+// @flow
 import firebase from 'firebase';
 
+import type { Board } from './Types';
+
 export default class Remote {
+  firebase: Object;
+  db: Object;
   constructor() {
     this.firebase = firebase.initializeApp({
       apiKey: process.env.apiKey,
@@ -11,7 +16,13 @@ export default class Remote {
     this.db = firebase.database();
   }
 
-  saveBoard(gameId, board) {
+  saveRoom(roomId: string, name: string) {
+    this.db.ref(`rooms/roomId`).set({
+      name,
+    });
+  }
+
+  saveBoard(gameId: string, board: Board) {
     this.db.ref(`games/${gameId}/board`).set(board);
   }
 }

@@ -37,7 +37,8 @@
     "react": "15.3.2",
     "react-dom": "15.3.2",
     "react-hex": "0.3.2",
-    "serialize-error": "2.0.0"
+    "serialize-error": "2.0.0",
+    "uuid": "2.0.3"
   },
   "devDependencies": {
     "babel-cli": "6.16.0",

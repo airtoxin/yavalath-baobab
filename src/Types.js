@@ -17,3 +17,8 @@ export type FinishInfo = {
   isWin?: boolean;
   player?: Player;
 };
+
+export type Room = {
+  id: string;
+  name: string;
+}

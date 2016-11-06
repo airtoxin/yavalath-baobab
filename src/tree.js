@@ -15,6 +15,7 @@ export const constants = {
   manipulators: {
     human: Symbol('human'),
     robot: Symbol('robot'),
+    online: Symbol('online'),
   },
 };
 
@@ -63,6 +64,8 @@ const board = lodash.range(game.constants.boardSize * 2 - 1).map(gridY => (
 
 const highlight = null;
 
+const rooms = {};
+
 const tree = new Baobab({
   constants,
   game,
@@ -72,6 +75,7 @@ const tree = new Baobab({
   turnPlayer,
   players,
   highlight,
+  rooms,
 }, {
   autoCommit: false,
   asynchronous: false,

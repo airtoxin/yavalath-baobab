@@ -5,6 +5,7 @@ import InfoBar from '../../organisms/InfoBar';
 import History from '../../organisms/History';
 import Board from '../Board';
 import Settings from '../Settings';
+import Rooms from '../Rooms';
 import styles from './styles.css';
 
 function App({ gameStarted }) {
@@ -14,7 +15,15 @@ function App({ gameStarted }) {
       <InfoBar />
       <Board />
     </div>
-  ) : <Settings />;
+  ) : (
+    <div>
+      <h3>Local Play</h3>
+      <Settings />
+      <hr />
+      <h3>Online Play</h3>
+      <Rooms />
+    </div>
+  );
 
   return (
     <div>
