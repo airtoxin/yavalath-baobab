@@ -2,6 +2,8 @@
 
 export type Player = {
   id: Symbol;
+  name: string;
+  color: string;
 };
 
 export type Grid = {
