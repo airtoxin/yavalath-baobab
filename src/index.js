@@ -10,9 +10,19 @@ import MonteCarlo from './logics/AIs/MonteCarlo';
 import { boardActions } from './actions';
 import Remote from './remote';
 
-new Remote();
+const remote = new Remote();
 
 const Rooted = root(tree, App);
+
+const connect = (refPath, selector, defaultValue) => {
+  const ref = remote.db.ref(refPath);
+  const cursor = tree.select(selector);
+
+  ref.on('value', snapshot => cursor.set(snapshot.val() || defaultValue));
+  cursor.on('update', updatee => ref.set(updatee.target.get() || defaultValue));
+}
+
+connect('rooms', ['rooms'], {});
 
 tree.select('game', 'started').on('update', (updatee) => {
   if (!updatee.target.get()) return;
