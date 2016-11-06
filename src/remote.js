@@ -16,12 +16,6 @@ export default class Remote {
     this.db = firebase.database();
   }
 
-  saveRoom(roomId: string, name: string) {
-    this.db.ref(`rooms/roomId`).set({
-      name,
-    });
-  }
-
   saveBoard(gameId: string, board: Board) {
     this.db.ref(`games/${gameId}/board`).set(board);
   }

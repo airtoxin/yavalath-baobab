@@ -23,11 +23,11 @@ export default class Rooms extends Component {
           <Button className="u-full-width" onClick={this.handleClick} disabled={this.state.name.length === 0}>Create new Room</Button>
         </section>
 
-        <ul>
-          {Object.entries(this.props.rooms).map(([id, name]) => (
-            <Room key={id} id={id} name={name} onClick={() => this.props.onSelectRoom(id)}/>
+        <section className={styles.flex}>
+          {Object.entries(this.props.rooms).map(([id, room]) => (
+            <Room key={id} room={room} onClick={() => this.props.onSelectRoom(id)}/>
           ))}
-        </ul>
+        </section>
       </div>
     );
   }

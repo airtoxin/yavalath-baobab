@@ -12,3 +12,7 @@ export function start(tree) {
   tree.set(['turnPlayer'], tree.get('players', 0));
   tree.commit();
 }
+
+export function startRemoteGame(tree) {
+  
+}

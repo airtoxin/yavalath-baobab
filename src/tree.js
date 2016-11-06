@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-operators */
 import Baobab from 'baobab';
 import lodash from 'lodash';
+import uuid from 'uuid';
 import { gridPoint } from 'react-hex';
 
 export const constants = {
@@ -34,6 +35,7 @@ const turnPlayer = null;
 
 const game = {
   started: false,
+  isRemote: false,
   constants: {
     boardSize: 5,
     gridSize: 30,
@@ -67,6 +69,7 @@ const highlight = null;
 const rooms = {};
 
 const tree = new Baobab({
+  id: uuid.v4(),
   constants,
   game,
   board,

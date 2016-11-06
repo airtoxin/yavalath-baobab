@@ -1,4 +1,19 @@
 .link {
   text-decoration: underline;
   cursor: pointer;
+  color: white;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  min-width: 230px;
+  flex-basis: auto;
+  background-color: gray;
+  padding: .5em;
+  margin: .5em;
+}
+
+.white {
+  color: white;
 }

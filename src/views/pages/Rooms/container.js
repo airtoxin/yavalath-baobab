@@ -5,8 +5,8 @@ import Component from './component';
 
 const Container = ({ rooms, dispatch }) => (
   <Component
-    onAddRoom={name => dispatch(roomActions.addRoom, name)}
-    onSelectRoom={id => dispatch(roomActions.startGame, id)}
+    onAddRoom={name => dispatch(roomActions.createRoom, name)}
+    onSelectRoom={roomId => dispatch(roomActions.joinRoom, roomId)}
     rooms={rooms}/>
 );
 

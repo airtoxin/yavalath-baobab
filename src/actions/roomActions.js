@@ -1,20 +1,22 @@
-import uuid from 'uuid';
-import { start } from './gameActions';
+import * as roomLogics from '../logics/roomLogics';
+import { startRemoteGame } from './gameActions';
+import { constants } from '../tree';
 
-export function addRoom(tree, name) {
-  const id = uuid.v4();
-  tree.set(["rooms", id], name);
+export function createRoom(tree, name) {
+  const room = roomLogics.create(name);
+  // create room
+  tree.set(["rooms", room.id], room);
+
   tree.commit();
 }
 
-export function startGame(tree, id) {
-  const manipulators = tree.get('constants', 'manipulators');
+export function joinRoom(tree, roomId) {
+  const { manipulators: { human, online } } = constants;
+
+  tree.set(['rooms', roomId, 'players', tree.get('id')], true);
 
   // set player info
-  tree.set(['players', 0, 'manipulator'], manipulators.human);
-  tree.set(['players', 1], { ...(tree.get(['players', 1])), manipulator: manipulators.online, name: 'remote' });
-
-  start(tree);
+  startRemoteGame(tree);
 
   tree.commit();
 }

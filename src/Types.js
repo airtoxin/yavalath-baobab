@@ -4,6 +4,7 @@ export type Player = {
   id: Symbol;
   name: string;
   color: string;
+  manipulator: Symbol,
 };
 
 export type Grid = {
@@ -23,4 +24,6 @@ export type FinishInfo = {
 export type Room = {
   id: string;
   name: string;
+  started: boolean;
+  entry: Object; // {[id]: true}
 }
