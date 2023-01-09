@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/airtoxin/yavalath-baobab#readme",
   "dependencies": {
-    "baobab": "2.3.3",
+    "baobab": "2.6.1",
     "baobab-react": "2.1.1",
     "lodash": "4.16.4",
     "react": "15.3.2",

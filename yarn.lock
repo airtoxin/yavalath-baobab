@@ -935,11 +935,11 @@ baobab-react@2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/baobab-react/-/baobab-react-2.1.1.tgz#b024eb52beacd779efff5fc900d9e5d31718456c"
 
-baobab@2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/baobab/-/baobab-2.3.3.tgz#f02fb307e45059e1b7a67596c45b3d2d44356434"
+baobab@2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/baobab/-/baobab-2.6.1.tgz#2d0d435b865603a0144d59b3404b5c5064d2f013"
   dependencies:
-    emmett "^3.1.1"
+    emmett "^3.2.0"
 
 base64-js@^1.0.2:
   version "1.2.0"
@@ -1692,9 +1692,9 @@ electron@^1.4.4:
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
 
-emmett@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/emmett/-/emmett-3.1.1.tgz#7173858aabdfece0f40232696d4b13fef232cf04"
+emmett@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/emmett/-/emmett-3.2.0.tgz#f6c5912760f13df66d401df7f9d2c4e657fc40a6"
 
 emojis-list@^2.0.0:
   version "2.1.0"
