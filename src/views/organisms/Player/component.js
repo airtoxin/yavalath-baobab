@@ -15,7 +15,9 @@ function getManipulator(index, manipulators) {
   return null;
 }
 
-function Player({ manipulators, className, player, onChange }) {
+function Player({
+  manipulators, className, player, onChange,
+}) {
   const labels = ['Human', 'Robot'];
 
   return (
@@ -24,12 +26,14 @@ function Player({ manipulators, className, player, onChange }) {
         className={styles.label}
         style={{ backgroundColor: player.color }}
         htmlFor={`${player.name} label`}
-      >{player.name}</label>
+      >
+        {player.name}
+      </label>
       <Switch
         className={styles.switch}
         labels={labels}
         active={getIndex(player.manipulator, manipulators)}
-        onChange={i => onChange(getManipulator(i, manipulators))}
+        onChange={(i) => onChange(getManipulator(i, manipulators))}
       />
     </section>
   );

@@ -7,13 +7,13 @@ export default class ErrorView extends Component {
   }
 
   componentWillMount() {
-    global.addEventListener('error', ee => this.setState({ error: ee.error }));
+    global.addEventListener('error', (ee) => this.setState({ error: ee.error }));
   }
 
   render() {
-    return !this.state.error ?
-      this.props.children :
-      (
+    return !this.state.error
+      ? this.props.children
+      : (
         <div>
           <h1>{this.state.error.name}</h1>
           <h2>{this.state.error.message}</h2>

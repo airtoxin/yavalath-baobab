@@ -72,7 +72,7 @@ export function checkBoard(sortedGrids) {
   if (mayLosePlayer !== null) return lose(mayLosePlayer);
 
   return { finished: false };
-};
+}
 
 export const checkFinish = (sortedGrids) => {
   const { finished, isWin } = checkBoard(sortedGrids);

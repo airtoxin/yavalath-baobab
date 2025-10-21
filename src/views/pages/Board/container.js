@@ -5,15 +5,16 @@ import Grid from '../../molecules/Grid';
 import Highlight from '../../organisms/Highlight';
 import { boardActions } from '../../../actions';
 
-const Board = (props) => {
+function Board(props) {
   const Grids = lodash.flatten(
-    props.board.map(row => row.filter(o => o.state !== null)
-      .map(({ x, y, gridX, gridY, state, occupiedPlayer }) => {
+    props.board.map((row) => row.filter((o) => o.state !== null)
+      .map(({
+        x, y, gridX, gridY, state, occupiedPlayer,
+      }) => {
         const { gridStates, gridSize } = props;
-        const fill =
-          state === gridStates.empty ? 'white' : // eslint-disable-line no-nested-ternary
-          state === gridStates.occupied ? occupiedPlayer.color :
-          'black'; // black is error...
+        const fill = state === gridStates.empty ? 'white' // eslint-disable-line no-nested-ternary
+          : state === gridStates.occupied ? occupiedPlayer.color
+            : 'black'; // black is error...
         const clickHandler = () => {
           if (props.turnPlayer.manipulator === props.human) {
             props.dispatch(boardActions.play, gridX, gridY);
@@ -30,8 +31,7 @@ const Board = (props) => {
             onClick={clickHandler}
           />
         );
-      }
-    ))
+      })),
   );
 
   return (
@@ -40,7 +40,7 @@ const Board = (props) => {
       <Highlight />
     </svg>
   );
-};
+}
 
 export default branch({
   board: ['board'],

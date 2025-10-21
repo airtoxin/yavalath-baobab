@@ -2,8 +2,9 @@ import React from 'react';
 import { branch } from 'baobab-react/higher-order';
 import Component from './component';
 
-const Container = ({ finished, winnerColor }) =>
-  <Component finished={finished} winnerColor={winnerColor} />;
+function Container({ finished, winnerColor }) {
+  return <Component finished={finished} winnerColor={winnerColor} />;
+}
 
 export default branch({
   finished: ['game', 'finished'],

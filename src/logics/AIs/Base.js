@@ -13,7 +13,7 @@ export default class Base {
   }
 
   getPlayableGrids(board) {
-    return flatten(board).filter(g => g.state === this.gridStates.empty);
+    return flatten(board).filter((g) => g.state === this.gridStates.empty);
   }
 
   static set(i, value, xs) {

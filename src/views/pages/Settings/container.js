@@ -11,7 +11,7 @@ function Settings({ players, dispatch }) {
       key={i}
       className={styles.playerManipulator}
       player={player}
-      onChange={manipulator => dispatch(gameActions.setManipulator, player.id, manipulator)}
+      onChange={(manipulator) => dispatch(gameActions.setManipulator, player.id, manipulator)}
     />
   ));
 

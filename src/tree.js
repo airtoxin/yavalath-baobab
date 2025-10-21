@@ -44,7 +44,7 @@ const game = {
 const history = [];
 const historyBackHistory = [];
 
-const board = lodash.range(game.constants.boardSize * 2 - 1).map(gridY => (
+const board = lodash.range(game.constants.boardSize * 2 - 1).map((gridY) => (
   lodash.range(game.constants.boardSize * 2 - 1).map((gridX) => {
     const { center: [x, y] } = gridPoint('pointy-topped', game.constants.gridSize, gridX, gridY, 30, 30);
     return {
@@ -53,9 +53,9 @@ const board = lodash.range(game.constants.boardSize * 2 - 1).map(gridY => (
       gridX,
       gridY,
       state:
-        (gridX + gridY < game.constants.boardSize - 1) ||
-        (gridX + gridY >= game.constants.boardSize * 3 - 2) ?
-        null : constants.gridStates.empty,
+        (gridX + gridY < game.constants.boardSize - 1)
+        || (gridX + gridY >= game.constants.boardSize * 3 - 2)
+          ? null : constants.gridStates.empty,
       occupiedPlayer: null,
     };
   })

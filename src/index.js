@@ -15,9 +15,9 @@ tree.select('game', 'started').on('update', (updatee) => {
   if (!updatee.target.get()) return;
 
   tree.get('players')
-    .filter(p => p.manipulator === tree.get('constants', 'manipulators', 'robot'))
+    .filter((p) => p.manipulator === tree.get('constants', 'manipulators', 'robot'))
     .forEach((robot, i) => {
-      const enemy = find(tree.get('players'), p => p.id !== robot.id);
+      const enemy = find(tree.get('players'), (p) => p.id !== robot.id);
       const ai = new MonteCarlo(robot, enemy, tree.get('constants'));
 
       tree.select('turnPlayer').on('update', (tpUpdatee) => {

@@ -24,7 +24,7 @@ export function historyBack(tree) {
     // back turn
     const turnPlayerCursor = tree.select('turnPlayer');
     const players = tree.get('players');
-    const prevTurnPlayer = findLast(players, p => p.id !== turnPlayerCursor.get('id'));
+    const prevTurnPlayer = findLast(players, (p) => p.id !== turnPlayerCursor.get('id'));
     turnPlayerCursor.set(prevTurnPlayer);
   }
 

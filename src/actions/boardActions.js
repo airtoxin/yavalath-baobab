@@ -23,7 +23,7 @@ export function playWithoutCommit(tree, gridX, gridY) {
   tree.select('history').push(gridCursor.get());
 
   // check game is just finished
-  const nextTurnPlayer = find(players, p => p.id !== turnPlayerCursor.get('id'));
+  const nextTurnPlayer = find(players, (p) => p.id !== turnPlayerCursor.get('id'));
   const finished = checkFinish(tree.get('board'));
   if (finished !== null) {
     // game end
