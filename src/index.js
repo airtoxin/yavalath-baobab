@@ -1,6 +1,6 @@
 import React from 'react';
 import { find } from 'lodash';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { root } from 'baobab-react/higher-order';
 import tree from './tree';
 import ErrorView from './views/ErrorView';
@@ -36,4 +36,6 @@ tree.select('game', 'started').on('update', (updatee) => {
     });
 });
 
-render(<ErrorView><Rooted /></ErrorView>, global.document.getElementById('app'));
+const container = document.getElementById('app');
+const rootElement = createRoot(container);
+rootElement.render(<ErrorView><Rooted /></ErrorView>);

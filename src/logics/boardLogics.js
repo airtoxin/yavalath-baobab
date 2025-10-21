@@ -1,27 +1,8 @@
-// @flow
 /* eslint-disable max-len */
 import { flatten } from 'lodash';
 import { constants } from '../tree';
 
-type Player = {
-  id: Symbol;
-};
-
-type Grid = {
-  gridX: number;
-  gridY: number;
-  occupiedPlayer: Player;
-};
-
-type Board = Array<Array<Grid>>;
-
-type FinishInfo = {
-  finished: boolean;
-  isWin?: boolean;
-  player?: Player;
-};
-
-export function isSamePlayerOccupied(sortedGrids: Board, { gridX, gridY, occupiedPlayer }: Grid, direction: number, hop: number) {
+export function isSamePlayerOccupied(sortedGrids, { gridX, gridY, occupiedPlayer }, direction, hop) {
   try {
     switch (direction) {
       case 3: // →
@@ -44,14 +25,14 @@ export function isSamePlayerOccupied(sortedGrids: Board, { gridX, gridY, occupie
   }
 }
 
-export function checkBoard(sortedGrids: Board): FinishInfo {
+export function checkBoard(sortedGrids) {
   const filledGrids = flatten(sortedGrids).filter(({ state, occupiedPlayer }) => state === constants.gridStates.occupied && occupiedPlayer !== null);
 
-  let mayLosePlayer: Player | null = null;
-  function win(player: Player): FinishInfo {
+  let mayLosePlayer = null;
+  function win(player) {
     return { finished: true, player, isWin: true };
   }
-  function lose(player: Player): FinishInfo {
+  function lose(player) {
     return { finished: true, player, isWin: false };
   }
 
@@ -93,18 +74,18 @@ export function checkBoard(sortedGrids: Board): FinishInfo {
   return { finished: false };
 };
 
-export const checkFinish = (sortedGrids: Board) => {
+export const checkFinish = (sortedGrids) => {
   const { finished, isWin } = checkBoard(sortedGrids);
   if (finished) return isWin;
   return null;
 };
 
-export const checkDraw = (sortedGrids: Board) => {
+export const checkDraw = (sortedGrids) => {
   const emptyGrids = flatten(sortedGrids).filter(({ state }) => state === constants.gridStates.empty);
   return emptyGrids.length === 0;
 };
 
-export const convertToRecordGridSystem = ({ gridX, gridY }: Grid) => {
+export const convertToRecordGridSystem = ({ gridX, gridY }) => {
   let x = gridX;
   const y = gridY;
 
